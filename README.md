@@ -1,6 +1,6 @@
-# EARS — ICASSP 2027 Challenge
+# RMSAU — ICASSP 2027 Challenge
 
-Website for **EARS: Embodied Audio Reasoning in Smart Homes**, an ICASSP 2027 Challenge.
+Website for **RMSAU: Real-world Multi-channel Spatial Audio Understanding**, an ICASSP 2027 Challenge for hierarchical spatial audio reasoning in smart homes.
 
 ## Local development
 

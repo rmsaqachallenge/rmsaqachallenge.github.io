@@ -5,24 +5,18 @@ import {
   AudioLines,
   CalendarClock,
   CheckCircle2,
-  Clock3,
   Database,
   FileCheck2,
   FileQuestion,
   Github,
-  ListChecks,
-  LocateFixed,
   Mail,
   Menu,
-  Move3d,
   Network,
-  Route,
-  ShieldAlert,
   Sparkles,
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { BlockMath } from "react-katex";
+import { BlockMath, InlineMath } from "react-katex";
 
 type NavItem = { label: string; href: string };
 
@@ -36,46 +30,69 @@ const navItems: NavItem[] = [
   { label: "Organizers", href: "#organizers" },
 ];
 
+type TaskVisual = "counting" | "detection" | "temporal" | "location" | "spatial" | "action";
+
 const categories: Array<{
   title: string;
   description: string;
-  icon: LucideIcon;
+  question: string;
+  answer: string;
+  visual: TaskVisual;
+  group: "temporal" | "spatial";
   index: string;
 }> = [
   {
     title: "Sound Counting",
-    description: "Reason about how many events or sources occur in an acoustic scene.",
-    icon: ListChecks,
+    description: "Count sound events, distinct sound types, repeated occurrences, or the maximum number of sounds active at the same time.",
+    question: "From the audio alone, what is the maximum number of overlapping sounds?",
+    answer: "The maximum overlap is 3 simultaneous sounds, with air conditioner, television, and toy train active from 2.0 s to 3.0 s.",
+    visual: "counting",
+    group: "temporal",
     index: "01",
   },
   {
-    title: "Source Localization",
-    description: "Determine the direction and spatial position of active sound sources.",
-    icon: LocateFixed,
+    title: "Temporal Detection",
+    description: "Detect when a sound starts, when it ends, and how long it remains active within the 10-second clip.",
+    question: "From what you hear, what time span does the object impact cover?",
+    answer: "The active interval for the object impact runs from 4.3 s to 4.8 s.",
+    visual: "detection",
+    group: "temporal",
     index: "02",
   },
   {
-    title: "Temporal Detection",
-    description: "Identify event timing, duration, onset, offset, and overlap.",
-    icon: Clock3,
+    title: "Temporal Relation",
+    description: "Determine whether two sounds occur before, after, during, or overlapping with one another.",
+    question: "Is the entire object impact contained within the duration of the toy train?",
+    answer: "From the interval boundaries, the toy train time span fully contains the full duration of the object impact.",
+    visual: "temporal",
+    group: "temporal",
     index: "03",
   },
   {
-    title: "Spatial Relations",
-    description: "Understand distances, relative positions, and movement in space.",
-    icon: Move3d,
+    title: "Spatial Location",
+    description: "Assign one sound source to one of eight discrete directions relative to the robot.",
+    question: "Where is the television relative to the robot?",
+    answer: "Spatially, the television is positioned toward the rear-left of the robot.",
+    visual: "location",
+    group: "spatial",
     index: "04",
   },
   {
-    title: "Temporal Relations",
-    description: "Reason about event order, concurrency, and temporal dependencies.",
-    icon: Route,
+    title: "Spatial Relation",
+    description: "Compare the relative position of one sound source with another sound source.",
+    question: "Where is the air conditioner relative to the television?",
+    answer: "The relative position places the air conditioner to the right of and behind the television.",
+    visual: "spatial",
+    group: "spatial",
     index: "05",
   },
   {
     title: "Action Prediction",
-    description: "Select a context-aware response to events in a smart-home scenario.",
-    icon: ShieldAlert,
+    description: "Predict the robot's safest next action after detecting and locating a sound event.",
+    question: "After detecting the object impact, what should the embodied home assistant do next?",
+    answer: "For this clip, the embodied assistant should safely observe the front area, notify the homeowner, and record the scene after detecting the object impact.",
+    visual: "action",
+    group: "spatial",
     index: "06",
   },
 ];
@@ -97,7 +114,7 @@ const metrics = [
     name: "Hierarchical Layer 2 Accuracy",
     short: "HIER ACC",
     description: "Counts a Layer 2 result as correct only when its corresponding Layer 1 answer is also correct.",
-    formula: String.raw`\begin{aligned}\boldsymbol{\mathrm{HIER\ ACC}}&\boldsymbol{=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]}\\[-1pt]&\boldsymbol{\quad\cdot\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}\end{aligned}`,
+    formula: String.raw`\boldsymbol{\mathrm{HIER\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}`,
   },
 ];
 
@@ -123,13 +140,132 @@ const resources: Array<{
   },
 ];
 
-function EarsMark() {
+function RmsauMark() {
   return (
     <span className="brand-mark" aria-hidden="true">
       <span className="brand-ring brand-ring--outer" />
       <span className="brand-ring brand-ring--inner" />
       <span className="brand-core" />
     </span>
+  );
+}
+
+function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
+  const commonProps = {
+    className: "task-diagram",
+    viewBox: "0 0 320 122",
+    role: "img" as const,
+    "aria-label": `${title} example diagram`,
+  };
+
+  if (kind === "counting") {
+    return (
+      <svg {...commonProps}>
+        <title>Three overlapping sounds on a ten-second timeline</title>
+        <text className="diagram-label" x="8" y="25">Air conditioner</text>
+        <text className="diagram-label" x="8" y="58">Television</text>
+        <text className="diagram-label" x="8" y="91">Toy train</text>
+        <rect className="diagram-bar" x="122" y="14" width="78" height="12" rx="6" />
+        <rect className="diagram-bar" x="232" y="14" width="72" height="12" rx="6" />
+        <rect className="diagram-bar" x="96" y="47" width="208" height="12" rx="6" />
+        <rect className="diagram-bar" x="152" y="80" width="112" height="12" rx="6" />
+        <line className="diagram-highlight diagram-dash" x1="200" y1="7" x2="200" y2="101" />
+        <text className="diagram-accent-label" x="207" y="116">3 simultaneous</text>
+      </svg>
+    );
+  }
+
+  if (kind === "detection") {
+    return (
+      <svg {...commonProps}>
+        <title>Object impact onset, offset, and duration</title>
+        <text className="diagram-label" x="8" y="53">Object impact</text>
+        <line className="diagram-axis" x1="104" y1="60" x2="306" y2="60" />
+        {[104, 144, 184, 224, 264, 306].map((x, index) => (
+          <g key={x}>
+            <line className="diagram-tick" x1={x} y1="55" x2={x} y2="66" />
+            <text className="diagram-tick-label" x={x - 5} y="82">{index * 2}</text>
+          </g>
+        ))}
+        <rect className="diagram-highlight" x="188" y="49" width="18" height="22" rx="5" />
+        <text className="diagram-strong-label" x="168" y="24">onset 4.3 s</text>
+        <text className="diagram-strong-label" x="221" y="39">offset 4.8 s</text>
+        <text className="diagram-accent-label" x="178" y="108">duration 0.5 s</text>
+      </svg>
+    );
+  }
+
+  if (kind === "temporal") {
+    return (
+      <svg {...commonProps}>
+        <title>Object impact contained within the toy train duration</title>
+        <text className="diagram-label" x="8" y="38">Toy train</text>
+        <text className="diagram-label" x="8" y="83">Object impact</text>
+        <line className="diagram-axis" x1="105" y1="99" x2="306" y2="99" />
+        <rect className="diagram-bar" x="130" y="25" width="138" height="14" rx="7" />
+        <rect className="diagram-highlight" x="191" y="70" width="18" height="18" rx="5" />
+        <line className="diagram-dash diagram-highlight" x1="191" y1="48" x2="191" y2="70" />
+        <line className="diagram-dash diagram-highlight" x1="209" y1="48" x2="209" y2="70" />
+        <text className="diagram-accent-label" x="218" y="84">contained within</text>
+        <text className="diagram-tick-label" x="102" y="116">0 s</text>
+        <text className="diagram-tick-label" x="292" y="116">10 s</text>
+      </svg>
+    );
+  }
+
+  if (kind === "location") {
+    return (
+      <svg {...commonProps}>
+        <title>Television located to the rear-left of the robot</title>
+        <circle className="diagram-orbit" cx="160" cy="61" r="43" />
+        <line className="diagram-axis" x1="160" y1="13" x2="160" y2="109" />
+        <line className="diagram-axis" x1="112" y1="61" x2="208" y2="61" />
+        <circle className="diagram-robot" cx="160" cy="61" r="8" />
+        <circle className="diagram-highlight" cx="134" cy="86" r="6" />
+        <path className="diagram-sector" d="M160 61 L116 61 A43 43 0 0 0 129 92 Z" />
+        <text className="diagram-strong-label" x="148" y="65">R</text>
+        <text className="diagram-accent-label" x="94" y="104">rear-left · TV</text>
+        <text className="diagram-tick-label" x="149" y="10">front</text>
+        <text className="diagram-tick-label" x="149" y="120">rear</text>
+        <text className="diagram-tick-label" x="87" y="65">left</text>
+        <text className="diagram-tick-label" x="216" y="65">right</text>
+      </svg>
+    );
+  }
+
+  if (kind === "spatial") {
+    return (
+      <svg {...commonProps}>
+        <title>Air conditioner positioned right of and behind the television</title>
+        <circle className="diagram-orbit" cx="160" cy="48" r="30" />
+        <circle className="diagram-robot" cx="160" cy="48" r="7" />
+        <rect className="diagram-source" x="112" y="79" width="28" height="17" rx="4" />
+        <rect className="diagram-highlight" x="218" y="91" width="32" height="17" rx="4" />
+        <path className="diagram-relation-arrow" d="M143 88 C166 73 200 78 220 96" />
+        <text className="diagram-strong-label" x="148" y="52">R</text>
+        <text className="diagram-label" x="103" y="115">Television</text>
+        <text className="diagram-accent-label" x="202" y="118">Air conditioner</text>
+        <text className="diagram-tick-label" x="194" y="71">right + behind</text>
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...commonProps}>
+      <title>Three-stage safe action sequence</title>
+      <circle className="diagram-action-node" cx="55" cy="51" r="24" />
+      <circle className="diagram-action-node" cx="160" cy="51" r="24" />
+      <circle className="diagram-action-node" cx="265" cy="51" r="24" />
+      <path className="diagram-relation-arrow" d="M82 51 H128" />
+      <path className="diagram-relation-arrow" d="M187 51 H233" />
+      <path className="diagram-icon" d="M45 51 C49 43 61 43 65 51 C61 59 49 59 45 51 Z M55 47 A4 4 0 1 0 55 55 A4 4 0 1 0 55 47" />
+      <path className="diagram-icon" d="M151 58 V45 L160 38 L169 45 V58 M155 58 V50 H165 V58" />
+      <path className="diagram-icon" d="M257 59 H273 M260 59 V48 A5 5 0 0 1 270 48 V59 M258 45 C261 38 269 35 275 39" />
+      <text className="diagram-strong-label" x="36" y="91">Localize</text>
+      <text className="diagram-strong-label" x="139" y="91">Observe</text>
+      <text className="diagram-accent-label" x="238" y="91">Notify</text>
+      <text className="diagram-tick-label" x="105" y="116">safe, context-aware response</text>
+    </svg>
   );
 }
 
@@ -262,10 +398,10 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to main content</a>
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="EARS home" onClick={() => setMenuOpen(false)}>
-          <EarsMark />
+        <a className="brand" href="#top" aria-label="RMSAU home" onClick={() => setMenuOpen(false)}>
+          <RmsauMark />
           <span className="brand-copy">
-            <strong>EARS</strong>
+            <strong>RMSAU</strong>
             <span>ICASSP 2027 Challenge</span>
           </span>
         </a>
@@ -320,13 +456,13 @@ export default function App() {
             <div className="hero__content">
               <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Challenge</div>
               <h1>
-                Embodied Audio
-                <span>Reasoning in Smart Homes</span>
+                Real-world Multi‑channel
+                <span>Spatial Audio Understanding</span>
               </h1>
               <p className="hero__lead">
-                A unified benchmark that moves spatial audio intelligence from recognizing
-                <em> what happened</em> to understanding <em>when</em>, <em>where</em>, and
-                <em> what to do next</em>.
+                A unified benchmark for understanding <em>what happened</em>, <em>when</em> and
+                <em> where</em> it occurred, how events relate, and <em>what to do next</em> in
+                real-world smart-home soundscapes.
               </p>
               <div className="hero__actions">
                 <a className="button button--primary" href="#dataset">
@@ -339,7 +475,7 @@ export default function App() {
               <div className="hero__meta" aria-label="Challenge highlights">
                 <div><strong>10 sec</strong><span>FOA recordings</span></div>
                 <div><strong>2 layers</strong><span>Unified reasoning</span></div>
-                <div><strong>6 categories</strong><span>Reasoning dimensions</span></div>
+                <div><strong>6 categories</strong><span>Understanding tasks</span></div>
               </div>
             </div>
             <div className="hero__visual">
@@ -347,7 +483,7 @@ export default function App() {
             </div>
           </div>
           <a className="scroll-cue" href="#overview" aria-label="Scroll to challenge overview">
-            <span>Discover EARS</span><ArrowDown size={16} />
+            <span>Discover RMSAU</span><ArrowDown size={16} />
           </a>
         </section>
 
@@ -356,12 +492,12 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                EARS is a unified two-layer spatial audio reasoning challenge built around
-                10-second First-Order Ambisonics recordings from smart-home environments. In
-                Layer 1, models identify the sound events present in a scene. The generated
-                semantic response then becomes part of the Layer 2 context, where models reason
-                about quantities, locations, timing, spatial and temporal relations, and
-                appropriate actions.
+                RMSAU is a unified two-layer challenge for real-world multi-channel spatial audio
+                understanding, built around 10-second First-Order Ambisonics recordings from
+                smart-home environments. In Layer 1, models identify the sound events present in
+                a scene. The generated semantic response then becomes part of the Layer 2 context,
+                where models reason about quantities, timing, spatial location, temporal and
+                spatial relations, and appropriate actions.
               </p>
               <p>
                 The challenge asks systems to move beyond acoustic event recognition toward
@@ -371,7 +507,7 @@ export default function App() {
                 multichannel spatial and temporal reasoning under one consistent benchmark.
               </p>
               <p>
-                By connecting perception, reasoning, and risk-aware decision making, EARS provides
+                By connecting perception, reasoning, and risk-aware decision making, RMSAU provides
                 a shared testbed for research at the intersection of spatial audio, embodied AI,
                 and intelligent environments. The benchmark is designed to expose both higher-level
                 reasoning capability and the propagation of errors across its two connected layers,
@@ -393,12 +529,12 @@ export default function App() {
               <article>
                 <span>600 h</span>
                 <h3>Simulated audio</h3>
-                <p>Generated smart-home acoustic scenes sampled at 24 kHz.</p>
+                <p>Generated smart-home acoustic scenes sampled at 16 kHz.</p>
               </article>
               <article>
                 <span>14 h</span>
                 <h3>Real-source audio</h3>
-                <p>Recordings built from real sound sources and sampled at 48 kHz.</p>
+                <p>Recordings built from real sound sources and sampled at 16 kHz.</p>
               </article>
               <article>
                 <span>166K</span>
@@ -429,7 +565,7 @@ export default function App() {
 
             <div className="dataset-specs">
               <div><AudioLines /><span>Audio format</span><strong>10-second First-Order Ambisonics</strong></div>
-              <div><Database /><span>Sampling rates</span><strong>24 kHz simulated · 48 kHz real</strong></div>
+              <div><Database /><span>Sampling rate</span><strong>16 kHz for simulated and real-source audio</strong></div>
               <div><Network /><span>QA structure</span><strong>Layer 1 perception → Layer 2 reasoning</strong></div>
             </div>
 
@@ -437,17 +573,23 @@ export default function App() {
               <div className="categories-header categories-header--stacked">
                 <span className="mini-label">Layer 2 taxonomy</span>
                 <h3>Six dimensions of embodied audio reasoning</h3>
-                <p>From event quantities and coordinates to temporal understanding and context-aware action.</p>
+                <p>Six question types connect temporal and spatial understanding with safe, context-aware action in smart homes.</p>
               </div>
               <div className="categories-grid">
-                {categories.map(({ title, description, icon: Icon, index }) => (
-                  <article className="category-card" key={title}>
-                    <div className="category-card__top">
-                      <div className="category-card__icon"><Icon /></div>
-                      <span>{index}</span>
+                {categories.map(({ title, description, question, answer, visual, group, index }) => (
+                  <article className={`task-card task-card--${group}`} key={title}>
+                    <div className="task-card__header">
+                      <span className="task-card__index">{index}</span>
+                      <h3>{title}</h3>
                     </div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
+                    <p className="task-card__description">{description}</p>
+                    <div className="task-card__visual">
+                      <TaskDiagram kind={visual} title={title} />
+                    </div>
+                    <div className="task-card__example">
+                      <p><strong>Q</strong><span>{question}</span></p>
+                      <p><strong>A</strong><span>{answer}</span></p>
+                    </div>
                   </article>
                 ))}
               </div>
@@ -466,16 +608,31 @@ export default function App() {
               {metrics.map((metric, index) => (
                 <article className="metric" key={metric.name}>
                   <div className="metric__index">{String(index + 1).padStart(2, "0")}</div>
-                  <div>
+                  <div className="metric__content">
                     <div className="metric__title"><h3>{metric.name}</h3><span>{metric.short}</span></div>
                     <p>{metric.description}</p>
-                    <div className="metric__formula" aria-label={`${metric.short} formula`}>
-                      <BlockMath math={metric.formula} />
-                    </div>
+                  </div>
+                  <div className="metric__formula" aria-label={`${metric.short} formula`}>
+                    <BlockMath math={metric.formula} />
                   </div>
                 </article>
               ))}
             </div>
+            <aside className="notation-card" aria-labelledby="notation-title">
+              <div className="notation-card__heading">
+                <span className="mini-label">Formula guide</span>
+                <h3 id="notation-title">Metric notation</h3>
+                <p>All free-text predictions are deterministically normalized and mapped to reference labels before these scores are computed.</p>
+              </div>
+              <dl className="notation-grid">
+                <div><dt><InlineMath math="N" /></dt><dd>Total number of evaluated records.</dd></div>
+                <div><dt><InlineMath math="\mathcal{R}(\cdot)" /></dt><dd>Rule-based post-processing that maps a generated response to a label.</dd></div>
+                <div><dt><InlineMath math="t_i^{(1)},\ t_i^{(2)}" /></dt><dd>Generated free-text responses for Layer 1 and Layer 2.</dd></div>
+                <div><dt><InlineMath math="y_i^{(1)},\ y_i^{(2)}" /></dt><dd>Reference labels for the two corresponding layers.</dd></div>
+                <div><dt><InlineMath math="\mathbb{1}[\cdot]" /></dt><dd>Indicator function: 1 when the enclosed condition is true, otherwise 0.</dd></div>
+              </dl>
+              <p className="notation-card__note"><strong>Hierarchical scoring.</strong> HIER ACC awards credit only when both Layer 1 and its dependent Layer 2 response are correct for the same record.</p>
+            </aside>
           </div>
         </section>
 
@@ -512,10 +669,13 @@ export default function App() {
             />
             <div className="timeline-list">
               {[
-                ["01", "Registration opens", "TBA"],
-                ["02", "Data & baseline release", "TBA"],
-                ["03", "Evaluation & submission", "TBA"],
-                ["04", "Results announced", "TBA"],
+                ["01", "Registration Opens and Release of the Training Dataset", "TBA"],
+                ["02", "Release of the Testing Dataset", "TBA"],
+                ["03", "Submission Deadline", "TBA"],
+                ["04", "Results Announcement", "TBA"],
+                ["05", "2-page Papers Due (by invitation only)", "January 07, 2027"],
+                ["06", "2-page Paper Acceptance Notification", "January 21, 2027"],
+                ["07", "Camera-ready 2-page Papers Due", "January 28, 2027"],
               ].map(([number, label, date]) => (
                 <article className="timeline-row" key={label}>
                   <span className="timeline-row__index">{number}</span>
@@ -538,13 +698,13 @@ export default function App() {
             <div className="license-card">
               <FileCheck2 />
               <p>
-                The EARS dataset and associated materials are intended exclusively for
-                participation in the ICASSP 2027 EARS Challenge and for non-commercial academic
+                The RMSAU dataset and associated materials are intended exclusively for
+                participation in the ICASSP 2027 RMSAU Challenge and for non-commercial academic
                 research. Redistribution, sublicensing, and commercial use are not permitted
                 without prior written permission from the organizers.
               </p>
               <p>
-                Users must acknowledge the EARS benchmark and cite the official dataset or
+                Users must acknowledge the RMSAU benchmark and cite the official dataset or
                 challenge paper in resulting publications. The complete license agreement and
                 required citation will accompany the official data release and will supersede
                 this preliminary summary.
@@ -561,7 +721,7 @@ export default function App() {
               description="Committee membership, affiliations, and official contact channels will be published as challenge preparations progress."
             />
             <div className="organizer-card organizer-card--stacked">
-              <div className="organizer-card__mark"><EarsMark /></div>
+              <div className="organizer-card__mark"><RmsauMark /></div>
               <div>
                 <span className="mini-label">Details forthcoming</span>
                 <h3>Organizer and contact details will be announced.</h3>
@@ -579,8 +739,8 @@ export default function App() {
       <footer className="site-footer">
         <div className="container site-footer__inner">
           <div className="footer-brand">
-            <EarsMark />
-            <div><strong>EARS</strong><span>Embodied Audio Reasoning in Smart Homes</span></div>
+            <RmsauMark />
+            <div><strong>RMSAU</strong><span>Real-world Multi-channel Spatial Audio Understanding</span></div>
           </div>
           <p>ICASSP 2027 Challenge · Preliminary website · Details subject to update</p>
           <a href="#top">Back to top <ArrowDown className="back-top-arrow" size={15} /></a>
