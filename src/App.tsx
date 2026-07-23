@@ -22,6 +22,7 @@ import {
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { BlockMath } from "react-katex";
 
 type NavItem = { label: string; href: string };
 
@@ -84,19 +85,19 @@ const metrics = [
     name: "Layer 1 Accuracy",
     short: "L1 ACC",
     description: "Measures correct semantic perception of the sound events present.",
-    formula: "L1 ACC = (1 / N) Σᵢ I[R(tᵢ¹) = yᵢ¹]",
+    formula: String.raw`\boldsymbol{\mathrm{L1\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]}`,
   },
   {
     name: "Layer 2 Accuracy",
     short: "L2 ACC",
     description: "Measures direct correctness on the six higher-level reasoning categories.",
-    formula: "L2 ACC = (1 / N) Σᵢ I[R(tᵢ²) = yᵢ²]",
+    formula: String.raw`\boldsymbol{\mathrm{L2\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}`,
   },
   {
     name: "Hierarchical Layer 2 Accuracy",
     short: "HIER ACC",
     description: "Counts a Layer 2 result as correct only when its corresponding Layer 1 answer is also correct.",
-    formula: "HIER ACC = (1 / N) Σᵢ I[R(tᵢ¹) = yᵢ¹] · I[R(tᵢ²) = yᵢ²]",
+    formula: String.raw`\begin{aligned}\boldsymbol{\mathrm{HIER\ ACC}}&\boldsymbol{=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]}\\[-1pt]&\boldsymbol{\quad\cdot\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}\end{aligned}`,
   },
 ];
 
@@ -459,7 +460,7 @@ export default function App() {
             <SectionHeading
               index="03 / Evaluation"
               title="Evaluation"
-              description="Performance is reported at the perception, reasoning, and hierarchical levels so that participants can distinguish direct accuracy from end-to-end dependency."
+              description="Performance is reported at the perception, reasoning, and hierarchical levels. Free-text outputs are normalized and mapped to reference labels through deterministic rule-based post-processing before scoring."
             />
             <div className="metrics-list metrics-list--stacked">
               {metrics.map((metric, index) => (
@@ -468,48 +469,12 @@ export default function App() {
                   <div>
                     <div className="metric__title"><h3>{metric.name}</h3><span>{metric.short}</span></div>
                     <p>{metric.description}</p>
-                    <code className="metric__formula">{metric.formula}</code>
+                    <div className="metric__formula" aria-label={`${metric.short} formula`}>
+                      <BlockMath math={metric.formula} />
+                    </div>
                   </div>
                 </article>
               ))}
-            </div>
-
-            <div className="evaluation-answer-format">
-              <span className="mini-label">Answer format</span>
-              <h3>Free-text generation with rule-based matching</h3>
-              <p>
-                Models generate natural-language answers rather than fixed option tokens. Before
-                scoring, each response is normalized and mapped to its reference label using a
-                deterministic rule-based matcher, denoted by R(·) in the metric definitions.
-              </p>
-
-              <div className="answer-window" aria-label="Illustrative free-text model response">
-                <div className="answer-window__bar"><i /><i /><i /><span>sample response</span></div>
-                <div className="answer-window__body">
-                  <span className="answer-prompt">assistant</span>
-                  <p>The alarm is behind and to the left of the listener.</p>
-                  <div className="answer-cursor" />
-                </div>
-              </div>
-
-              <div className="matching-pipeline" aria-label="Evaluation post-processing workflow">
-                {[
-                  ["01", "Free-text response", "The model generates an unrestricted natural-language answer."],
-                  ["02", "Deterministic normalization", "Formatting, case, and equivalent answer expressions are standardized."],
-                  ["03", "Rule-based matching", "The normalized response is mapped to a reference label before scoring."],
-                ].map(([number, title, description]) => (
-                  <article key={title}>
-                    <span>{number}</span>
-                    <div><h4>{title}</h4><p>{description}</p></div>
-                  </article>
-                ))}
-              </div>
-
-              <p className="formula-note">
-                <strong>I[·]</strong> is the indicator function, <strong>tᵢ¹</strong> and
-                <strong> tᵢ²</strong> are the generated Layer 1 and Layer 2 texts, and
-                <strong> yᵢ¹</strong> and <strong>yᵢ²</strong> are their reference labels.
-              </p>
             </div>
           </div>
         </section>
