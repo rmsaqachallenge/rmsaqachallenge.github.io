@@ -3,27 +3,22 @@ import {
   ArrowDown,
   ArrowRight,
   AudioLines,
-  BellRing,
-  Boxes,
   CalendarClock,
   CheckCircle2,
   Clock3,
   Database,
+  FileCheck2,
   FileQuestion,
   Github,
-  Layers3,
   ListChecks,
   LocateFixed,
   Mail,
   Menu,
   Move3d,
   Network,
-  Radar,
   Route,
   ShieldAlert,
   Sparkles,
-  TimerReset,
-  Volume2,
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -32,10 +27,11 @@ type NavItem = { label: string; href: string };
 
 const navItems: NavItem[] = [
   { label: "Overview", href: "#overview" },
-  { label: "Task", href: "#task" },
+  { label: "Dataset", href: "#dataset" },
   { label: "Evaluation", href: "#evaluation" },
   { label: "Resources", href: "#resources" },
   { label: "Timeline", href: "#timeline" },
+  { label: "License", href: "#license" },
 ];
 
 const categories: Array<{
@@ -85,28 +81,18 @@ const categories: Array<{
 const metrics = [
   {
     name: "Layer 1 Accuracy",
-    short: "L1",
+    short: "L1 ACC",
     description: "Measures correct semantic perception of the sound events present.",
   },
   {
-    name: "Raw Layer 2 Accuracy",
-    short: "L2",
+    name: "Layer 2 Accuracy",
+    short: "L2 ACC",
     description: "Measures direct correctness on the six higher-level reasoning categories.",
   },
   {
     name: "Hierarchical Layer 2 Accuracy",
-    short: "H-L2",
-    description: "Evaluates Layer 2 performance under the benchmark’s hierarchical dependency.",
-  },
-  {
-    name: "Joint Record Accuracy",
-    short: "Joint",
-    description: "Measures whether both layers are answered correctly for the same record.",
-  },
-  {
-    name: "Category-wise Accuracy",
-    short: "6×",
-    description: "Reports performance separately across all six Layer 2 reasoning categories.",
+    short: "HIER ACC",
+    description: "Evaluates reasoning performance under the benchmark’s Layer 1-to-Layer 2 dependency.",
   },
 ];
 
@@ -200,17 +186,17 @@ function AudioField() {
 }
 
 function SectionHeading({
-  eyebrow,
+  index,
   title,
   description,
 }: {
-  eyebrow: string;
+  index: string;
   title: string;
   description?: string;
 }) {
   return (
     <div className="section-heading">
-      <div className="eyebrow"><span />{eyebrow}</div>
+      <div className="eyebrow"><span />{index}</div>
       <h2>{title}</h2>
       {description && <p>{description}</p>}
     </div>
@@ -308,8 +294,8 @@ export default function App() {
                 <em> what to do next</em>.
               </p>
               <div className="hero__actions">
-                <a className="button button--primary" href="#task">
-                  Explore the task <ArrowDown size={17} />
+                <a className="button button--primary" href="#dataset">
+                  Explore the dataset <ArrowDown size={17} />
                 </a>
                 <a className="button button--ghost" href="#overview">
                   Challenge overview
@@ -332,167 +318,133 @@ export default function App() {
 
         <section className="overview section" id="overview">
           <div className="container">
-            <div className="overview__top">
-              <SectionHeading
-                eyebrow="Challenge overview"
-                title="From acoustic perception to situated intelligence."
-              />
-              <div className="overview__copy">
-                <p>
-                  Spatial audio understanding requires more than identifying the sounds in a
-                  recording. An intelligent system must also determine when and where events
-                  occur, understand how they relate, and decide how to respond.
-                </p>
-                <p>
-                  EARS invites participants to build models that reason over 10-second
-                  First-Order Ambisonics recordings through a unified two-layer question-answering
-                  benchmark designed around complex smart-home environments.
-                </p>
-              </div>
-            </div>
-
-            <div className="statement-card">
-              <div className="statement-card__icon"><Volume2 /></div>
+            <SectionHeading index="01 / Overview" title="Challenge Overview" />
+            <div className="overview-narrative">
               <p>
-                The goal is not only to hear an acoustic scene, but to understand it—
-                <strong> semantically, spatially, temporally, and operationally.</strong>
+                EARS is a unified two-layer spatial audio reasoning challenge built around
+                10-second First-Order Ambisonics recordings from smart-home environments. In
+                Layer 1, models identify the sound events present in a scene. The generated
+                semantic response then becomes part of the Layer 2 context, where models reason
+                about quantities, locations, timing, spatial and temporal relations, and
+                appropriate actions.
               </p>
-              <div className="statement-card__signal" aria-hidden="true">
-                {[16, 32, 22, 48, 38, 62, 28, 50, 20, 36, 16].map((height, index) => (
-                  <span key={index} style={{ height }} />
-                ))}
-              </div>
-            </div>
-
-            <div className="principles-grid">
-              <article>
-                <div className="principle-number">01</div>
-                <Radar />
-                <h3>Spatial by design</h3>
-                <p>FOA recordings preserve multichannel cues needed to reason about direction, distance, and motion.</p>
-              </article>
-              <article>
-                <div className="principle-number">02</div>
-                <Layers3 />
-                <h3>Hierarchical by nature</h3>
-                <p>Semantic perception becomes context for higher-level reasoning, exposing both capability and error propagation.</p>
-              </article>
-              <article>
-                <div className="principle-number">03</div>
-                <BellRing />
-                <h3>Grounded in action</h3>
-                <p>Smart-home scenarios connect audio understanding to monitoring, notification, and urgent response.</p>
-              </article>
+              <p>
+                The challenge asks systems to move beyond acoustic event recognition toward
+                situated intelligence: understanding what is happening in a home, when and where
+                it occurs, how events relate to one another, and what the situation requires next.
+                Its goal is to advance models that combine reliable semantic perception with
+                multichannel spatial and temporal reasoning under one consistent benchmark.
+              </p>
+              <p>
+                By connecting perception, reasoning, and risk-aware decision making, EARS provides
+                a shared testbed for research at the intersection of spatial audio, embodied AI,
+                and intelligent environments. The benchmark is designed to expose both higher-level
+                reasoning capability and the propagation of errors across its two connected layers,
+                supporting progress toward safer and more context-aware smart-home systems.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="task section section--raised" id="task">
+        <section className="dataset section section--raised" id="dataset">
           <div className="container">
             <SectionHeading
-              eyebrow="Downstream task"
-              title="One benchmark. Two connected layers."
-              description="Every sample follows the same hierarchical generative multiple-choice question-answering structure."
+              index="02 / Dataset"
+              title="Dataset"
+              description="A large-scale combination of simulated and real-source FOA recordings, paired with hierarchical questions that connect scene perception to embodied reasoning."
             />
 
-            <div className="pipeline" aria-label="EARS two-layer benchmark pipeline">
-              <div className="pipeline__step pipeline__step--input">
-                <div className="pipeline__icon"><AudioLines /></div>
-                <span className="pipeline__label">Input</span>
-                <h3>10-second FOA</h3>
-                <p>A spatial acoustic scene captured in First-Order Ambisonics.</p>
-              </div>
-              <div className="pipeline__connector" aria-hidden="true"><span /><ArrowRight /></div>
-              <div className="pipeline__step pipeline__step--layer-one">
-                <div className="pipeline__tag">Layer 1</div>
-                <div className="pipeline__icon"><Boxes /></div>
-                <span className="pipeline__label">Perceive</span>
-                <h3>What is happening?</h3>
-                <p>Identify the sound events present and establish semantic scene context.</p>
-              </div>
-              <div className="pipeline__connector pipeline__connector--context" aria-hidden="true">
-                <span /><small>generated context</small><ArrowRight />
-              </div>
-              <div className="pipeline__step pipeline__step--layer-two">
-                <div className="pipeline__tag">Layer 2</div>
-                <div className="pipeline__icon"><Network /></div>
-                <span className="pipeline__label">Reason</span>
-                <h3>When, where, and next?</h3>
-                <p>Answer one of six spatial, temporal, or action-oriented questions.</p>
-              </div>
+            <div className="dataset-stats" aria-label="Dataset statistics">
+              <article>
+                <span>600 h</span>
+                <h3>Simulated audio</h3>
+                <p>Generated smart-home acoustic scenes sampled at 24 kHz.</p>
+              </article>
+              <article>
+                <span>14 h</span>
+                <h3>Real-source audio</h3>
+                <p>Recordings built from real sound sources and sampled at 48 kHz.</p>
+              </article>
+              <article>
+                <span>166K</span>
+                <h3>Training QAs</h3>
+                <p>Hierarchical question-answer pairs covering both benchmark layers.</p>
+              </article>
+              <article>
+                <span>23K</span>
+                <h3>Test QAs</h3>
+                <p>18K test QAs plus 5K QAs from the real-data evaluation set.</p>
+              </article>
             </div>
 
-            <div className="task-note">
-              <TimerReset size={18} />
+            <div className="dataset-description">
               <p>
-                During inference, the generated Layer 1 response is incorporated into the Layer 2
-                conversation context, enabling evaluation of higher-level reasoning and upstream error propagation.
+                Each record contains a 10-second FOA soundfield that preserves the multichannel
+                cues required to reason about direction, distance, motion, and relationships among
+                sources. The combination of extensive simulation and real-source material supports
+                both controlled coverage and evaluation under more realistic acoustic conditions.
+              </p>
+              <p>
+                All records use a generative multiple-choice question-answering format. During
+                training, a model generates both the selected option and its textual content. At
+                inference time, the Layer 1 response is incorporated into the Layer 2 conversation
+                context, making semantic understanding an explicit part of downstream reasoning.
               </p>
             </div>
 
-            <div className="categories-header">
-              <div>
+            <div className="dataset-specs">
+              <div><AudioLines /><span>Audio format</span><strong>10-second First-Order Ambisonics</strong></div>
+              <div><Database /><span>Sampling rates</span><strong>24 kHz simulated · 48 kHz real</strong></div>
+              <div><Network /><span>QA structure</span><strong>Layer 1 perception → Layer 2 reasoning</strong></div>
+            </div>
+
+            <div className="dataset-qa">
+              <span className="mini-label">Answer format</span>
+              <h3>Generative multiple-choice QA</h3>
+              <p>
+                Models return an answer option together with its natural-language content, enabling
+                consistent evaluation while preserving an open-ended generative interface.
+              </p>
+              <div className="answer-window" aria-label="Illustrative answer format">
+                <div className="answer-window__bar"><i /><i /><i /><span>sample response</span></div>
+                <div className="answer-window__body">
+                  <span className="answer-prompt">assistant</span>
+                  <p><strong>Option C.</strong> The alarm is behind and to the left of the listener.</p>
+                  <div className="answer-cursor" />
+                </div>
+              </div>
+            </div>
+
+            <div className="taxonomy-block">
+              <div className="categories-header categories-header--stacked">
                 <span className="mini-label">Layer 2 taxonomy</span>
                 <h3>Six dimensions of embodied audio reasoning</h3>
+                <p>From event quantities and coordinates to temporal understanding and context-aware action.</p>
               </div>
-              <p>From quantities and coordinates to risk-aware decisions in the home.</p>
-            </div>
-
-            <div className="categories-grid">
-              {categories.map(({ title, description, icon: Icon, index }) => (
-                <article className="category-card" key={title}>
-                  <div className="category-card__top">
-                    <div className="category-card__icon"><Icon /></div>
-                    <span>{index}</span>
-                  </div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className="action-panel">
-              <div className="action-panel__content">
-                <span className="mini-label mini-label--gold">Smart-home reasoning</span>
-                <h3>Action Prediction closes the loop.</h3>
-                <p>
-                  Models must identify relevant events, assess risk and spatial context, and select
-                  an appropriate response rather than treating action as a separate task.
-                </p>
-              </div>
-              <div className="response-scale" aria-label="Action prediction response levels">
-                <div className="response-scale__item response-scale__item--monitor">
-                  <span>01</span><div><strong>Monitor</strong><small>Continue observing</small></div>
-                </div>
-                <div className="response-scale__line" />
-                <div className="response-scale__item response-scale__item--notify">
-                  <span>02</span><div><strong>Notify</strong><small>Non-emergency update</small></div>
-                </div>
-                <div className="response-scale__line" />
-                <div className="response-scale__item response-scale__item--urgent">
-                  <span>03</span><div><strong>Alert</strong><small>Urgent response</small></div>
-                </div>
+              <div className="categories-grid">
+                {categories.map(({ title, description, icon: Icon, index }) => (
+                  <article className="category-card" key={title}>
+                    <div className="category-card__top">
+                      <div className="category-card__icon"><Icon /></div>
+                      <span>{index}</span>
+                    </div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         <section className="evaluation section" id="evaluation">
-          <div className="container evaluation__layout">
-            <div className="evaluation__intro">
-              <SectionHeading
-                eyebrow="Evaluation"
-                title="Measure every step from hearing to reasoning."
-                description="EARS reports perception, reasoning, hierarchical, and end-to-end performance rather than reducing capability to a single score."
-              />
-              <div className="evaluation-orbit" aria-hidden="true">
-                <div className="evaluation-orbit__center">EARS</div>
-                {metrics.map((metric, index) => (
-                  <span key={metric.short} style={{ "--orbit-index": index } as React.CSSProperties}>{metric.short}</span>
-                ))}
-              </div>
-            </div>
-            <div className="metrics-list">
+          <div className="container">
+            <SectionHeading
+              index="03 / Evaluation"
+              title="Evaluation"
+              description="Performance is reported at the perception, reasoning, and hierarchical levels so that participants can distinguish direct accuracy from end-to-end dependency."
+            />
+            <div className="metrics-list metrics-list--stacked">
               {metrics.map((metric, index) => (
                 <article className="metric" key={metric.name}>
                   <div className="metric__index">{String(index + 1).padStart(2, "0")}</div>
@@ -508,42 +460,24 @@ export default function App() {
 
         <section className="resources section section--raised" id="resources">
           <div className="container">
-            <div className="resources__header">
-              <SectionHeading
-                eyebrow="Participant resources"
-                title="Everything you need to take part."
-                description="The challenge is being prepared. Official participation materials will be released here as they become available."
-              />
-              <div className="status-pill"><span /> Preparation in progress</div>
-            </div>
-            <div className="resources-grid">
-              {resources.map(({ title, description, icon: Icon }) => (
-                <article className="resource-card" key={title}>
-                  <div className="resource-card__icon"><Icon /></div>
-                  <div className="coming-soon"><CalendarClock size={14} /> Coming soon</div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
+            <SectionHeading
+              index="04 / Resources"
+              title="Participant Resources"
+              description="Official participation materials will be released here as the challenge preparation progresses."
+            />
+            <div className="status-pill"><span /> Preparation in progress</div>
+            <div className="resources-list">
+              {resources.map(({ title, description, icon: Icon }, index) => (
+                <article className="resource-row" key={title}>
+                  <div className="resource-row__index">{String(index + 1).padStart(2, "0")}</div>
+                  <div className="resource-row__icon"><Icon /></div>
+                  <div className="resource-row__content">
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </div>
+                  <div className="coming-soon coming-soon--static"><CalendarClock size={14} /> Coming soon</div>
                 </article>
               ))}
-            </div>
-
-            <div className="format-panel">
-              <div>
-                <span className="mini-label">Answer format</span>
-                <h3>Generative multiple-choice QA</h3>
-                <p>
-                  During training, models generate both the answer option and its corresponding
-                  textual content using a causal language-modeling objective.
-                </p>
-              </div>
-              <div className="answer-window" aria-label="Illustrative answer format">
-                <div className="answer-window__bar"><i /><i /><i /><span>sample response</span></div>
-                <div className="answer-window__body">
-                  <span className="answer-prompt">assistant</span>
-                  <p><strong>Option C.</strong> The alarm is behind and to the left of the listener.</p>
-                  <div className="answer-cursor" />
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -551,28 +485,26 @@ export default function App() {
         <section className="timeline section" id="timeline">
           <div className="container">
             <SectionHeading
-              eyebrow="Challenge timeline"
-              title="The EARS schedule is taking shape."
+              index="05 / Timeline"
+              title="Challenge Timeline"
               description="Exact dates will be announced once the official challenge calendar is finalized."
             />
-            <div className="timeline-track">
+            <div className="timeline-list">
               {[
                 ["01", "Registration opens", "TBA"],
                 ["02", "Data & baseline release", "TBA"],
                 ["03", "Evaluation & submission", "TBA"],
                 ["04", "Results announced", "TBA"],
-              ].map(([number, label, date], index) => (
-                <div className="timeline-item" key={label}>
-                  <div className="timeline-item__marker"><span>{number}</span></div>
-                  {index < 3 && <div className="timeline-item__line" />}
-                  <div className="timeline-item__content">
-                    <span>{date}</span><h3>{label}</h3>
-                  </div>
-                </div>
+              ].map(([number, label, date]) => (
+                <article className="timeline-row" key={label}>
+                  <span className="timeline-row__index">{number}</span>
+                  <h3>{label}</h3>
+                  <strong>{date}</strong>
+                </article>
               ))}
             </div>
 
-            <div className="organizer-card">
+            <div className="organizer-card organizer-card--stacked">
               <div className="organizer-card__mark"><EarsMark /></div>
               <div>
                 <span className="mini-label">Organizing committee</span>
@@ -583,6 +515,31 @@ export default function App() {
                 <span><Mail size={16} /> Contact coming soon</span>
                 <span><Github size={16} /> Repository coming soon</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="license section section--raised" id="license">
+          <div className="container">
+            <SectionHeading
+              index="06 / License"
+              title="License"
+              description="The benchmark is being prepared for challenge participation and responsible academic use."
+            />
+            <div className="license-card">
+              <FileCheck2 />
+              <p>
+                The EARS dataset and associated materials are intended exclusively for
+                participation in the ICASSP 2027 EARS Challenge and for non-commercial academic
+                research. Redistribution, sublicensing, and commercial use are not permitted
+                without prior written permission from the organizers.
+              </p>
+              <p>
+                Users must acknowledge the EARS benchmark and cite the official dataset or
+                challenge paper in resulting publications. The complete license agreement and
+                required citation will accompany the official data release and will supersede
+                this preliminary summary.
+              </p>
             </div>
           </div>
         </section>
