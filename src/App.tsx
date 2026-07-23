@@ -220,10 +220,11 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
         <circle className="diagram-orbit" cx="160" cy="61" r="43" />
         <line className="diagram-axis" x1="160" y1="13" x2="160" y2="109" />
         <line className="diagram-axis" x1="112" y1="61" x2="208" y2="61" />
-        <circle className="diagram-robot" cx="160" cy="61" r="8" />
-        <circle className="diagram-highlight" cx="134" cy="86" r="6" />
         <path className="diagram-sector" d="M160 61 L116 61 A43 43 0 0 0 129 92 Z" />
-        <text className="diagram-strong-label" x="148" y="65">R</text>
+        <circle className="diagram-highlight" cx="134" cy="86" r="6" />
+        <circle className="diagram-robot" cx="160" cy="61" r="19" />
+        <text className="diagram-robot-label" x="160" y="65" textAnchor="middle">Robot</text>
+        <path className="diagram-facing" d="M160 14 L156 21 H164 Z" />
         <text className="diagram-accent-label" x="94" y="104">rear-left · TV</text>
         <text className="diagram-tick-label" x="149" y="10">front</text>
         <text className="diagram-tick-label" x="149" y="120">rear</text>
@@ -237,15 +238,22 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
     return (
       <svg {...commonProps}>
         <title>Air conditioner positioned right of and behind the television</title>
-        <circle className="diagram-orbit" cx="160" cy="48" r="30" />
-        <circle className="diagram-robot" cx="160" cy="48" r="7" />
-        <rect className="diagram-source" x="112" y="79" width="28" height="17" rx="4" />
-        <rect className="diagram-highlight" x="218" y="91" width="32" height="17" rx="4" />
-        <path className="diagram-relation-arrow" d="M143 88 C166 73 200 78 220 96" />
-        <text className="diagram-strong-label" x="148" y="52">R</text>
-        <text className="diagram-label" x="103" y="115">Television</text>
-        <text className="diagram-accent-label" x="202" y="118">Air conditioner</text>
-        <text className="diagram-tick-label" x="194" y="71">right + behind</text>
+        <circle className="diagram-orbit" cx="160" cy="55" r="33" />
+        <line className="diagram-axis" x1="160" y1="14" x2="160" y2="105" />
+        <line className="diagram-axis" x1="112" y1="55" x2="208" y2="55" />
+        <path className="diagram-facing" d="M160 13 L156 20 H164 Z" />
+        <circle className="diagram-robot" cx="160" cy="55" r="19" />
+        <text className="diagram-robot-label" x="160" y="59" textAnchor="middle">Robot</text>
+        <rect className="diagram-source" x="90" y="78" width="30" height="18" rx="4" />
+        <rect className="diagram-highlight" x="226" y="88" width="34" height="18" rx="4" />
+        <path className="diagram-relation-arrow" d="M123 87 C155 72 200 76 226 97" />
+        <text className="diagram-label" x="80" y="114">Television</text>
+        <text className="diagram-accent-label" x="212" y="118">Air conditioner</text>
+        <text className="diagram-tick-label" x="194" y="75">right + behind</text>
+        <text className="diagram-axis-label" x="148" y="10">Front</text>
+        <text className="diagram-axis-label" x="148" y="120">Rear</text>
+        <text className="diagram-axis-label" x="82" y="59">Left</text>
+        <text className="diagram-axis-label" x="218" y="59">Right</text>
       </svg>
     );
   }
@@ -261,10 +269,10 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
       <path className="diagram-icon" d="M45 51 C49 43 61 43 65 51 C61 59 49 59 45 51 Z M55 47 A4 4 0 1 0 55 55 A4 4 0 1 0 55 47" />
       <path className="diagram-icon" d="M151 58 V45 L160 38 L169 45 V58 M155 58 V50 H165 V58" />
       <path className="diagram-icon" d="M257 59 H273 M260 59 V48 A5 5 0 0 1 270 48 V59 M258 45 C261 38 269 35 275 39" />
-      <text className="diagram-strong-label" x="36" y="91">Localize</text>
-      <text className="diagram-strong-label" x="139" y="91">Observe</text>
-      <text className="diagram-accent-label" x="238" y="91">Notify</text>
-      <text className="diagram-tick-label" x="105" y="116">safe, context-aware response</text>
+      <text className="diagram-action-label" x="31" y="93">Localize</text>
+      <text className="diagram-action-label" x="136" y="93">Observe</text>
+      <text className="diagram-action-label diagram-action-label--accent" x="239" y="93">Notify</text>
+      <text className="diagram-action-caption" x="86" y="117">safe, context-aware response</text>
     </svg>
   );
 }
@@ -341,6 +349,30 @@ function SectionHeading({
       <h2>{title}</h2>
       {description && <p>{description}</p>}
     </div>
+  );
+}
+
+function MetricNotation({ metric }: { metric: string }) {
+  if (metric === "L1 ACC") {
+    return (
+      <p className="metric__notation">
+        <InlineMath math="N" /> is the number of evaluated records; <InlineMath math="\mathcal{R}(\cdot)" /> maps a free-text response to a label; <InlineMath math="t_i^{(1)}" /> and <InlineMath math="y_i^{(1)}" /> are the generated Layer 1 response and its reference label. The indicator <InlineMath math="\mathbb{1}[\cdot]" /> returns 1 for a correct match and 0 otherwise.
+      </p>
+    );
+  }
+
+  if (metric === "L2 ACC") {
+    return (
+      <p className="metric__notation">
+        <InlineMath math="t_i^{(2)}" /> and <InlineMath math="y_i^{(2)}" /> denote the generated Layer 2 response and its reference label. <InlineMath math="N" />, <InlineMath math="\mathcal{R}(\cdot)" />, and <InlineMath math="\mathbb{1}[\cdot]" /> follow the Layer 1 definition above.
+      </p>
+    );
+  }
+
+  return (
+    <p className="metric__notation">
+      A record contributes 1 only when both indicator terms are 1—that is, its Layer 1 response and the dependent Layer 2 response are both correct after rule-based matching.
+    </p>
   );
 }
 
@@ -492,9 +524,9 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                RMSAU is a unified two-layer challenge for real-world multi-channel spatial audio
-                understanding, built around 10-second First-Order Ambisonics recordings from
-                smart-home environments. In Layer 1, models identify the sound events present in
+                RMSAU is a unified two‑layer challenge for real‑world multi‑channel spatial audio
+                understanding, built around 10‑second First‑Order Ambisonics recordings from
+                smart‑home environments. In Layer 1, models identify the sound events present in
                 a scene. The generated semantic response then becomes part of the Layer 2 context,
                 where models reason about quantities, timing, spatial location, temporal and
                 spatial relations, and appropriate actions.
@@ -507,11 +539,11 @@ export default function App() {
                 multichannel spatial and temporal reasoning under one consistent benchmark.
               </p>
               <p>
-                By connecting perception, reasoning, and risk-aware decision making, RMSAU provides
+                By connecting perception, reasoning, and risk‑aware decision making, RMSAU provides
                 a shared testbed for research at the intersection of spatial audio, embodied AI,
-                and intelligent environments. The benchmark is designed to expose both higher-level
+                and intelligent environments. The benchmark is designed to expose both higher‑level
                 reasoning capability and the propagation of errors across its two connected layers,
-                supporting progress toward safer and more context-aware smart-home systems.
+                supporting progress toward safer and more context‑aware smart‑home systems.
               </p>
             </div>
           </div>
@@ -611,6 +643,7 @@ export default function App() {
                   <div className="metric__content">
                     <div className="metric__title"><h3>{metric.name}</h3><span>{metric.short}</span></div>
                     <p>{metric.description}</p>
+                    <MetricNotation metric={metric.short} />
                   </div>
                   <div className="metric__formula" aria-label={`${metric.short} formula`}>
                     <BlockMath math={metric.formula} />
@@ -618,21 +651,6 @@ export default function App() {
                 </article>
               ))}
             </div>
-            <aside className="notation-card" aria-labelledby="notation-title">
-              <div className="notation-card__heading">
-                <span className="mini-label">Formula guide</span>
-                <h3 id="notation-title">Metric notation</h3>
-                <p>All free-text predictions are deterministically normalized and mapped to reference labels before these scores are computed.</p>
-              </div>
-              <dl className="notation-grid">
-                <div><dt><InlineMath math="N" /></dt><dd>Total number of evaluated records.</dd></div>
-                <div><dt><InlineMath math="\mathcal{R}(\cdot)" /></dt><dd>Rule-based post-processing that maps a generated response to a label.</dd></div>
-                <div><dt><InlineMath math="t_i^{(1)},\ t_i^{(2)}" /></dt><dd>Generated free-text responses for Layer 1 and Layer 2.</dd></div>
-                <div><dt><InlineMath math="y_i^{(1)},\ y_i^{(2)}" /></dt><dd>Reference labels for the two corresponding layers.</dd></div>
-                <div><dt><InlineMath math="\mathbb{1}[\cdot]" /></dt><dd>Indicator function: 1 when the enclosed condition is true, otherwise 0.</dd></div>
-              </dl>
-              <p className="notation-card__note"><strong>Hierarchical scoring.</strong> HIER ACC awards credit only when both Layer 1 and its dependent Layer 2 response are correct for the same record.</p>
-            </aside>
           </div>
         </section>
 
@@ -680,7 +698,7 @@ export default function App() {
                 <article className="timeline-row" key={label}>
                   <span className="timeline-row__index">{number}</span>
                   <h3>{label}</h3>
-                  <strong>{date}</strong>
+                  <strong className={`timeline-date ${date === "TBA" ? "is-tba" : "is-confirmed"}`}>{date}</strong>
                 </article>
               ))}
             </div>
