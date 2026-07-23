@@ -1965,33 +1965,6 @@ p {
   font-weight: 550;
 }
 
-.dataset-qa {
-  max-width: 940px;
-  margin-bottom: 108px;
-  padding: 40px;
-  border: 1px solid var(--color-border);
-  border-radius: 15px;
-  background: rgba(8, 19, 33, 0.64);
-}
-
-.dataset-qa h3 {
-  margin-bottom: 14px;
-  font-size: clamp(1.7rem, 3vw, 2.55rem);
-  line-height: 1.2;
-  letter-spacing: -0.04em;
-}
-
-.dataset-qa > p {
-  max-width: 740px;
-  margin-bottom: 34px;
-  color: #96a9bd;
-  line-height: 1.78;
-}
-
-.dataset-qa .answer-window {
-  max-width: 760px;
-}
-
 .taxonomy-block {
   padding-top: 72px;
   border-top: 1px solid var(--color-border);
@@ -2032,6 +2005,96 @@ p {
 .metrics-list--stacked .metric p {
   max-width: 650px;
   font-size: 0.95rem;
+}
+
+.metric__formula {
+  display: block;
+  max-width: 760px;
+  margin-top: 18px;
+  padding: 13px 16px;
+  border-left: 2px solid rgba(88, 227, 195, 0.58);
+  background: rgba(88, 227, 195, 0.045);
+  color: #c9d9e8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.evaluation-answer-format {
+  max-width: 940px;
+  margin-top: 88px;
+  padding-top: 72px;
+  border-top: 1px solid var(--color-border);
+}
+
+.evaluation-answer-format h3 {
+  max-width: 780px;
+  margin: 14px 0 18px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.evaluation-answer-format > p:not(.formula-note) {
+  max-width: 780px;
+  margin: 0 0 34px;
+  color: #9aadc1;
+  font-size: 0.98rem;
+  line-height: 1.82;
+}
+
+.evaluation-answer-format .answer-window {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
+.matching-pipeline {
+  max-width: 760px;
+  border-top: 1px solid var(--color-border);
+}
+
+.matching-pipeline article {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  gap: 22px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.matching-pipeline article > span {
+  color: var(--color-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+.matching-pipeline h4 {
+  margin: 0 0 7px;
+  color: #dbe5ef;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.matching-pipeline p {
+  margin: 0;
+  color: #879bb1;
+  font-size: 0.85rem;
+  line-height: 1.72;
+}
+
+.formula-note {
+  max-width: 760px;
+  margin: 26px 0 0;
+  color: #71869d;
+  font-size: 0.77rem;
+  line-height: 1.75;
+}
+
+.formula-note strong {
+  color: #afc2d6;
+  font-weight: 600;
 }
 
 .resources .status-pill {
@@ -2150,6 +2213,10 @@ p {
   gap: 22px;
 }
 
+.organizers .organizer-card {
+  margin-top: 0;
+}
+
 .license-card {
   padding-top: 42px;
   border-top: 1px solid var(--color-border);
@@ -2188,10 +2255,6 @@ p {
 
   .dataset-specs strong {
     grid-column: 2;
-  }
-
-  .dataset-qa {
-    padding: 28px 22px;
   }
 
   .resource-row {

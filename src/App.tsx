@@ -32,6 +32,7 @@ const navItems: NavItem[] = [
   { label: "Resources", href: "#resources" },
   { label: "Timeline", href: "#timeline" },
   { label: "License", href: "#license" },
+  { label: "Organizers", href: "#organizers" },
 ];
 
 const categories: Array<{
@@ -83,16 +84,19 @@ const metrics = [
     name: "Layer 1 Accuracy",
     short: "L1 ACC",
     description: "Measures correct semantic perception of the sound events present.",
+    formula: "L1 ACC = (1 / N) Σᵢ I[R(tᵢ¹) = yᵢ¹]",
   },
   {
     name: "Layer 2 Accuracy",
     short: "L2 ACC",
     description: "Measures direct correctness on the six higher-level reasoning categories.",
+    formula: "L2 ACC = (1 / N) Σᵢ I[R(tᵢ²) = yᵢ²]",
   },
   {
     name: "Hierarchical Layer 2 Accuracy",
     short: "HIER ACC",
-    description: "Evaluates reasoning performance under the benchmark’s Layer 1-to-Layer 2 dependency.",
+    description: "Counts a Layer 2 result as correct only when its corresponding Layer 1 answer is also correct.",
+    formula: "HIER ACC = (1 / N) Σᵢ I[R(tᵢ¹) = yᵢ¹] · I[R(tᵢ²) = yᵢ²]",
   },
 ];
 
@@ -212,19 +216,39 @@ export default function App() {
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
+    let animationFrame = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-28% 0px -58%", threshold: [0.05, 0.2, 0.5] },
-    );
+    const updateActiveSection = () => {
+      const readingLine = window.scrollY + Math.min(window.innerHeight * 0.35, 260);
+      let current = sectionIds[0];
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      sections.forEach((section) => {
+        if (section.offsetTop <= readingLine) current = section.id;
+      });
+
+      const atPageEnd =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      if (atPageEnd) current = sectionIds[sectionIds.length - 1];
+
+      setActiveSection((previous) => (previous === current ? previous : current));
+    };
+
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("hashchange", scheduleUpdate);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("hashchange", scheduleUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -254,13 +278,23 @@ export default function App() {
                 href={item.href}
                 className={activeSection === section ? "is-active" : ""}
                 aria-current={activeSection === section ? "location" : undefined}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  setActiveSection(section);
+                  setMenuOpen(false);
+                }}
               >
                 {item.label}
               </a>
             );
           })}
-          <a className="nav-cta" href="#resources" onClick={() => setMenuOpen(false)}>
+          <a
+            className="nav-cta"
+            href="#resources"
+            onClick={() => {
+              setActiveSection("resources");
+              setMenuOpen(false);
+            }}
+          >
             Updates soon <ArrowRight size={15} />
           </a>
         </nav>
@@ -385,10 +419,10 @@ export default function App() {
                 both controlled coverage and evaluation under more realistic acoustic conditions.
               </p>
               <p>
-                All records use a generative multiple-choice question-answering format. During
-                training, a model generates both the selected option and its textual content. At
-                inference time, the Layer 1 response is incorporated into the Layer 2 conversation
-                context, making semantic understanding an explicit part of downstream reasoning.
+                Each record follows the same hierarchical question-answering structure. At
+                inference time, the model produces a free-text Layer 1 response, which is then
+                incorporated into the Layer 2 conversation context. This makes semantic
+                understanding an explicit prerequisite for the reasoning that follows.
               </p>
             </div>
 
@@ -396,23 +430,6 @@ export default function App() {
               <div><AudioLines /><span>Audio format</span><strong>10-second First-Order Ambisonics</strong></div>
               <div><Database /><span>Sampling rates</span><strong>24 kHz simulated · 48 kHz real</strong></div>
               <div><Network /><span>QA structure</span><strong>Layer 1 perception → Layer 2 reasoning</strong></div>
-            </div>
-
-            <div className="dataset-qa">
-              <span className="mini-label">Answer format</span>
-              <h3>Generative multiple-choice QA</h3>
-              <p>
-                Models return an answer option together with its natural-language content, enabling
-                consistent evaluation while preserving an open-ended generative interface.
-              </p>
-              <div className="answer-window" aria-label="Illustrative answer format">
-                <div className="answer-window__bar"><i /><i /><i /><span>sample response</span></div>
-                <div className="answer-window__body">
-                  <span className="answer-prompt">assistant</span>
-                  <p><strong>Option C.</strong> The alarm is behind and to the left of the listener.</p>
-                  <div className="answer-cursor" />
-                </div>
-              </div>
             </div>
 
             <div className="taxonomy-block">
@@ -451,9 +468,48 @@ export default function App() {
                   <div>
                     <div className="metric__title"><h3>{metric.name}</h3><span>{metric.short}</span></div>
                     <p>{metric.description}</p>
+                    <code className="metric__formula">{metric.formula}</code>
                   </div>
                 </article>
               ))}
+            </div>
+
+            <div className="evaluation-answer-format">
+              <span className="mini-label">Answer format</span>
+              <h3>Free-text generation with rule-based matching</h3>
+              <p>
+                Models generate natural-language answers rather than fixed option tokens. Before
+                scoring, each response is normalized and mapped to its reference label using a
+                deterministic rule-based matcher, denoted by R(·) in the metric definitions.
+              </p>
+
+              <div className="answer-window" aria-label="Illustrative free-text model response">
+                <div className="answer-window__bar"><i /><i /><i /><span>sample response</span></div>
+                <div className="answer-window__body">
+                  <span className="answer-prompt">assistant</span>
+                  <p>The alarm is behind and to the left of the listener.</p>
+                  <div className="answer-cursor" />
+                </div>
+              </div>
+
+              <div className="matching-pipeline" aria-label="Evaluation post-processing workflow">
+                {[
+                  ["01", "Free-text response", "The model generates an unrestricted natural-language answer."],
+                  ["02", "Deterministic normalization", "Formatting, case, and equivalent answer expressions are standardized."],
+                  ["03", "Rule-based matching", "The normalized response is mapped to a reference label before scoring."],
+                ].map(([number, title, description]) => (
+                  <article key={title}>
+                    <span>{number}</span>
+                    <div><h4>{title}</h4><p>{description}</p></div>
+                  </article>
+                ))}
+              </div>
+
+              <p className="formula-note">
+                <strong>I[·]</strong> is the indicator function, <strong>tᵢ¹</strong> and
+                <strong> tᵢ²</strong> are the generated Layer 1 and Layer 2 texts, and
+                <strong> yᵢ¹</strong> and <strong>yᵢ²</strong> are their reference labels.
+              </p>
             </div>
           </div>
         </section>
@@ -504,18 +560,6 @@ export default function App() {
               ))}
             </div>
 
-            <div className="organizer-card organizer-card--stacked">
-              <div className="organizer-card__mark"><EarsMark /></div>
-              <div>
-                <span className="mini-label">Organizing committee</span>
-                <h3>Organizer and contact details will be announced.</h3>
-                <p>Committee members, affiliations, and the official challenge email will appear here.</p>
-              </div>
-              <div className="organizer-card__links" aria-label="Upcoming organizer links">
-                <span><Mail size={16} /> Contact coming soon</span>
-                <span><Github size={16} /> Repository coming soon</span>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -540,6 +584,28 @@ export default function App() {
                 required citation will accompany the official data release and will supersede
                 this preliminary summary.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="organizers section" id="organizers">
+          <div className="container">
+            <SectionHeading
+              index="07 / Organizers"
+              title="Organizing Committee"
+              description="Committee membership, affiliations, and official contact channels will be published as challenge preparations progress."
+            />
+            <div className="organizer-card organizer-card--stacked">
+              <div className="organizer-card__mark"><EarsMark /></div>
+              <div>
+                <span className="mini-label">Details forthcoming</span>
+                <h3>Organizer and contact details will be announced.</h3>
+                <p>Confirmed committee members and affiliations will appear here.</p>
+              </div>
+              <div className="organizer-card__links" aria-label="Upcoming organizer links">
+                <span><Mail size={16} /> Contact coming soon</span>
+                <span><Github size={16} /> Repository coming soon</span>
+              </div>
             </div>
           </div>
         </section>
