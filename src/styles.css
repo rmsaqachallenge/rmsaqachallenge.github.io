@@ -337,9 +337,25 @@ svg {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(400px, 0.96fr);
+  grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.84fr);
+  grid-template-areas:
+    "title title"
+    "content visual";
   align-items: center;
-  gap: 54px;
+  column-gap: 58px;
+  row-gap: 38px;
+}
+
+.hero__title-block {
+  grid-area: title;
+}
+
+.hero__content {
+  grid-area: content;
+}
+
+.hero__visual {
+  grid-area: visual;
 }
 
 .conference-pill,
@@ -359,7 +375,7 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   padding: 0 13px;
   border: 1px solid rgba(0, 113, 227, 0.15);
   border-radius: 999px;
@@ -369,22 +385,22 @@ svg {
 }
 
 .hero h1 {
-  max-width: 780px;
-  margin-bottom: 27px;
+  margin-bottom: 0;
   color: var(--text);
-  font-size: clamp(3.3rem, 5.2vw, 4.9rem);
+  font-size: clamp(2rem, 3.02vw, 2.72rem);
   font-weight: 700;
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  line-height: 1.04;
+  letter-spacing: -0.052em;
+  white-space: nowrap;
 }
 
-.hero h1 span {
-  display: block;
-  margin-top: 15px;
+.hero__title-primary,
+.hero__title-accent {
+  display: inline;
+}
+
+.hero__title-accent {
   color: var(--blue);
-  font-size: 0.58em;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
 }
 
 .hero__lead {
@@ -483,7 +499,7 @@ svg {
 
 .audio-field {
   position: relative;
-  width: min(100%, 560px);
+  width: min(100%, 440px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -1488,8 +1504,9 @@ svg {
   }
 
   .hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
-    gap: 25px;
+    grid-template-columns: minmax(0, 1.14fr) minmax(330px, 0.86fr);
+    column-gap: 32px;
+    row-gap: 34px;
   }
 }
 
@@ -1505,15 +1522,28 @@ svg {
 
   .hero__inner {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "content"
+      "visual";
   }
 
+  .hero__title-block,
   .hero__content {
     text-align: center;
   }
 
-  .conference-pill,
+  .hero__title-block .conference-pill,
   .hero__lead {
     margin-inline: auto;
+  }
+
+  .hero h1 {
+    max-width: 760px;
+    margin-inline: auto;
+    font-size: clamp(2.55rem, 7vw, 3.75rem);
+    line-height: 1.02;
+    white-space: normal;
   }
 
   .hero__actions,
@@ -1526,7 +1556,7 @@ svg {
   }
 
   .audio-field {
-    width: min(100%, 520px);
+    width: min(100%, 460px);
   }
 
   .scroll-cue {
@@ -1574,7 +1604,13 @@ svg {
     line-height: 0.98;
   }
 
-  .hero h1 span {
+  .hero__title-primary,
+  .hero__title-accent {
+    display: block;
+  }
+
+  .hero__title-accent {
+    margin-top: 10px;
     font-size: 0.66em;
     line-height: 1.1;
   }

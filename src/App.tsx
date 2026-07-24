@@ -434,7 +434,7 @@ export default function App() {
           <RmsauMark />
           <span className="brand-copy">
             <strong>RMSAU</strong>
-            <span>ICASSP 2027 Challenge</span>
+            <span>ICASSP 2027 Grand Challenge</span>
           </span>
         </a>
 
@@ -485,12 +485,14 @@ export default function App() {
           <div className="hero-glow hero-glow--left" />
           <div className="hero-glow hero-glow--right" />
           <div className="container hero__inner">
-            <div className="hero__content">
-              <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Challenge</div>
+            <div className="hero__title-block">
+              <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Grand Challenge</div>
               <h1>
-                Real-world Multi‑channel
-                <span>Spatial Audio Understanding</span>
+                <span className="hero__title-primary">Real-world Multi‑channel</span>{" "}
+                <span className="hero__title-accent">Spatial Audio Understanding</span>
               </h1>
+            </div>
+            <div className="hero__content">
               <p className="hero__lead">
                 A unified benchmark for understanding <em>what happened</em>, <em>when</em> and
                 <em> where</em> it occurred, how events relate, and <em>what to do next</em> in
@@ -760,7 +762,7 @@ export default function App() {
             <RmsauMark />
             <div><strong>RMSAU</strong><span>Real-world Multi-channel Spatial Audio Understanding</span></div>
           </div>
-          <p>ICASSP 2027 Challenge · Preliminary website · Details subject to update</p>
+          <p>ICASSP 2027 Grand Challenge · Preliminary website · Details subject to update</p>
           <a href="#top">Back to top <ArrowDown className="back-top-arrow" size={15} /></a>
         </div>
       </footer>
