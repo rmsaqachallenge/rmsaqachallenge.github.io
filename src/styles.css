@@ -21,7 +21,7 @@
   --shadow-md: 0 18px 55px rgba(0, 0, 0, 0.09);
   --header-height: 68px;
   --container: 1180px;
-  --section-content: 940px;
+  --section-content: 1180px;
 }
 
 * {
@@ -498,7 +498,8 @@ svg {
 
 .hero__visual {
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-items: end;
 }
 
 .audio-field {
@@ -642,7 +643,10 @@ svg {
   font-size: 1.08rem;
   font-weight: 400;
   line-height: 1.68;
-  text-wrap: pretty;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-wrap: wrap;
 }
 
 .overview-narrative,
@@ -654,7 +658,8 @@ svg {
 .timeline-list,
 .license-card,
 .organizer-card {
-  max-width: 940px;
+  width: 100%;
+  max-width: var(--section-content);
 }
 
 .overview-narrative {
@@ -673,7 +678,10 @@ svg {
   hyphens: none;
   overflow-wrap: normal;
   word-break: normal;
-  text-wrap: pretty;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-wrap: wrap;
 }
 
 .overview-narrative p:last-child,
@@ -684,8 +692,8 @@ svg {
 
 .dataset-stats {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   margin-bottom: 72px;
 }
 
@@ -708,15 +716,15 @@ svg {
 
 .dataset-stats article {
   min-height: 225px;
-  padding: 32px;
+  padding: 29px 27px;
   border-radius: 26px;
 }
 
 .dataset-stats article > span {
   display: block;
-  margin-bottom: 42px;
+  margin-bottom: 38px;
   color: var(--blue);
-  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-size: clamp(3rem, 4.4vw, 4.5rem);
   font-weight: 650;
   line-height: 0.9;
   letter-spacing: -0.065em;
@@ -762,6 +770,10 @@ svg {
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.72;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-wrap: wrap;
 }
 
 .dataset-specs {
@@ -826,7 +838,10 @@ svg {
   color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.65;
-  text-wrap: pretty;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-wrap: wrap;
 }
 
 .categories-grid {
@@ -842,7 +857,7 @@ svg {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: 25px 24px 24px;
+  padding: 27px 26px 26px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-top: 3px solid var(--task-accent);
@@ -892,7 +907,7 @@ svg {
 }
 
 .task-card__description {
-  min-height: 82px;
+  min-height: 70px;
   margin-bottom: 0;
   color: var(--text-secondary);
   font-size: 0.88rem;
@@ -902,9 +917,9 @@ svg {
 .task-card__visual {
   display: grid;
   place-items: center;
-  min-height: 128px;
+  min-height: 148px;
   margin: 19px 0 20px;
-  padding: 10px 5px;
+  padding: 12px 8px;
   border: 1px solid color-mix(in srgb, var(--task-accent) 15%, transparent);
   border-radius: 17px;
   background: rgba(255, 255, 255, 0.74);
@@ -1165,7 +1180,7 @@ svg {
 }
 
 .metric p {
-  max-width: 680px;
+  max-width: none;
   margin-bottom: 0;
   color: var(--text-secondary);
   font-size: 0.98rem;
@@ -1561,6 +1576,7 @@ svg {
 
   .hero__visual {
     margin-top: 38px;
+    justify-items: center;
   }
 
   .audio-field {
@@ -1569,6 +1585,10 @@ svg {
 
   .scroll-cue {
     display: none;
+  }
+
+  .dataset-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .categories-grid {
