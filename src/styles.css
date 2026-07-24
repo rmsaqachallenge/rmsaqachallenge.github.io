@@ -615,7 +615,9 @@ svg {
 }
 
 .participation h2 {
-  margin-bottom: 48px;
+  margin-bottom: 43px;
+  padding-bottom: 43px;
+  border-bottom: 1px solid var(--border-strong);
   color: var(--text);
   font-size: clamp(3rem, 5vw, 4.65rem);
   font-weight: 700;
@@ -625,10 +627,8 @@ svg {
 
 .participation__copy {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px;
-  padding-top: 38px;
-  border-top: 1px solid var(--border-strong);
+  grid-template-columns: 1fr;
+  gap: 28px;
 }
 
 .participation__copy p {
@@ -647,7 +647,9 @@ svg {
 
 .section-heading {
   max-width: var(--section-content);
-  margin-bottom: 66px;
+  margin-bottom: 43px;
+  padding-bottom: 43px;
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .eyebrow {
@@ -671,6 +673,10 @@ svg {
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.055em;
+}
+
+.section-heading h2:last-child {
+  margin-bottom: 0;
 }
 
 .section-heading > p {
@@ -697,11 +703,6 @@ svg {
 .organizer-card {
   width: 100%;
   max-width: var(--section-content);
-}
-
-.overview-narrative {
-  padding-top: 43px;
-  border-top: 1px solid var(--border-strong);
 }
 
 .overview-narrative p {
@@ -1672,15 +1673,14 @@ svg {
   }
 
   .participation h2 {
-    margin-bottom: 38px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
     font-size: clamp(2.5rem, 11vw, 3.2rem);
     line-height: 1.03;
   }
 
   .participation__copy {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 30px;
+    gap: 24px;
   }
 
   .participation__copy p {
@@ -1758,7 +1758,8 @@ svg {
   }
 
   .section-heading {
-    margin-bottom: 47px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
   }
 
   .section-heading h2 {
