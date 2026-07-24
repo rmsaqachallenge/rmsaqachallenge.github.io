@@ -679,8 +679,8 @@ svg {
 .dataset-description,
 .dataset-specs,
 .taxonomy-block,
-.metrics-list,
 .resources-list,
+.guidelines-card,
 .timeline-list,
 .license-card,
 .organizer-card {
@@ -1172,11 +1172,6 @@ svg {
   font-size: 1.12rem;
 }
 
-.metrics-list {
-  display: grid;
-  gap: 18px;
-}
-
 .metric {
   display: grid;
   grid-template-columns: 54px minmax(0, 1fr);
@@ -1223,22 +1218,6 @@ svg {
   line-height: 1.64;
 }
 
-.metric .metric__notation {
-  max-width: none;
-  margin-top: 13px;
-  padding-top: 13px;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.86rem;
-  line-height: 1.62;
-}
-
-.metric__notation .katex {
-  color: var(--text);
-  font-size: 1em;
-  font-weight: 600;
-}
-
 .metric__formula {
   grid-column: 1 / -1;
   max-width: 100%;
@@ -1269,6 +1248,34 @@ svg {
 .metric__formula .katex {
   font-size: 1em;
   font-weight: 700;
+}
+
+.score-components {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.score-components > div {
+  display: grid;
+  gap: 5px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(0, 113, 227, 0.035);
+}
+
+.score-components strong {
+  color: var(--blue-dark);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.score-components span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 .status-pill,
@@ -1331,6 +1338,65 @@ svg {
   background: rgba(255, 255, 255, 0.65);
   color: var(--text-muted);
   white-space: nowrap;
+}
+
+.guidelines-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.6fr);
+  gap: 44px;
+  margin-top: 32px;
+  padding: 36px 40px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--page);
+  box-shadow: var(--shadow-sm);
+}
+
+.guidelines-card__heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.guidelines-card__heading > svg {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  padding: 10px;
+  border-radius: 13px;
+  background: rgba(0, 143, 122, 0.09);
+  color: var(--teal);
+}
+
+.guidelines-card .mini-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--teal);
+}
+
+.guidelines-card h3 {
+  margin-bottom: 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.guidelines-card__copy {
+  display: grid;
+  gap: 18px;
+}
+
+.guidelines-card__copy p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.68;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
 }
 
 .timeline-list {
@@ -1840,16 +1906,13 @@ svg {
 
   .metric__formula {
     margin-top: 20px;
-    padding: 18px 14px;
-    font-size: 0.95rem;
+    padding: 16px 8px;
+    font-size: 0.82rem;
   }
 
-  .metric:last-child .metric__formula {
-    font-size: 0.95rem;
-  }
-
-  .metric .metric__notation {
-    font-size: 1rem;
+  .score-components {
+    grid-template-columns: 1fr;
+    margin-top: 8px;
   }
 
   .resource-row {
@@ -1869,6 +1932,19 @@ svg {
 
   .resources .status-pill {
     margin-top: -15px;
+  }
+
+  .guidelines-card {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-top: 24px;
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .guidelines-card__copy p {
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
   .timeline-row {

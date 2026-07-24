@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { BlockMath, InlineMath } from "react-katex";
+import { BlockMath } from "react-katex";
 
 type NavItem = { label: string; href: string };
 
@@ -97,26 +97,7 @@ const categories: Array<{
   },
 ];
 
-const metrics = [
-  {
-    name: "Layer 1 Accuracy",
-    short: "L1 ACC",
-    description: "Measures correct semantic perception of the sound events present.",
-    formula: String.raw`\boldsymbol{\mathrm{L1\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]}`,
-  },
-  {
-    name: "Layer 2 Accuracy",
-    short: "L2 ACC",
-    description: "Measures direct correctness on the six higher-level reasoning categories.",
-    formula: String.raw`\boldsymbol{\mathrm{L2\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}`,
-  },
-  {
-    name: "Hierarchical Layer 2 Accuracy",
-    short: "HIER ACC",
-    description: "Counts a Layer 2 result as correct only when its corresponding Layer 1 answer is also correct.",
-    formula: String.raw`\boldsymbol{\mathrm{HIER\ ACC}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(1)}\right)=y_i^{(1)}\right]\mathbb{1}\!\left[\mathcal{R}\!\left(t_i^{(2)}\right)=y_i^{(2)}\right]}`,
-  },
-];
+const scoreFormula = String.raw`\boldsymbol{\mathrm{Score}=0.25A_{\mathrm{L1}}+0.25A_{\mathrm{L2}}+0.50A_{\mathrm{CL2}}}`;
 
 const resources: Array<{
   title: string;
@@ -349,30 +330,6 @@ function SectionHeading({
       <h2>{title}</h2>
       {description && <p>{description}</p>}
     </div>
-  );
-}
-
-function MetricNotation({ metric }: { metric: string }) {
-  if (metric === "L1 ACC") {
-    return (
-      <p className="metric__notation">
-        <InlineMath math="N" /> is the number of evaluated records; <InlineMath math="\mathcal{R}(\cdot)" /> maps a free-text response to a label; <InlineMath math="t_i^{(1)}" /> and <InlineMath math="y_i^{(1)}" /> are the generated Layer 1 response and its reference label. The indicator <InlineMath math="\mathbb{1}[\cdot]" /> returns 1 for a correct match and 0 otherwise.
-      </p>
-    );
-  }
-
-  if (metric === "L2 ACC") {
-    return (
-      <p className="metric__notation">
-        <InlineMath math="t_i^{(2)}" /> and <InlineMath math="y_i^{(2)}" /> denote the generated Layer 2 response and its reference label. <InlineMath math="N" />, <InlineMath math="\mathcal{R}(\cdot)" />, and <InlineMath math="\mathbb{1}[\cdot]" /> follow the Layer 1 definition above.
-      </p>
-    );
-  }
-
-  return (
-    <p className="metric__notation">
-      A record contributes 1 only when both indicator terms are 1—that is, its Layer 1 response and the dependent Layer 2 response are both correct after rule-based matching.
-    </p>
   );
 }
 
@@ -718,23 +675,23 @@ export default function App() {
             <SectionHeading
               index="03 / Evaluation"
               title="Evaluation"
-              description="Performance is reported at the perception, reasoning, and hierarchical levels. Free-text outputs are normalized and mapped to reference labels through deterministic rule-based post-processing before scoring."
+              description="Free-text outputs are normalized and mapped to reference labels through deterministic rule-based post-processing before the official score is calculated."
             />
-            <div className="metrics-list metrics-list--stacked">
-              {metrics.map((metric, index) => (
-                <article className="metric" key={metric.name}>
-                  <div className="metric__index">{String(index + 1).padStart(2, "0")}</div>
-                  <div className="metric__content">
-                    <div className="metric__title"><h3>{metric.name}</h3><span>{metric.short}</span></div>
-                    <p>{metric.description}</p>
-                    <MetricNotation metric={metric.short} />
-                  </div>
-                  <div className="metric__formula" aria-label={`${metric.short} formula`}>
-                    <BlockMath math={metric.formula} />
-                  </div>
-                </article>
-              ))}
-            </div>
+            <article className="metric metric--score">
+              <div className="metric__index">01</div>
+              <div className="metric__content">
+                <div className="metric__title"><h3>Overall Score</h3><span>Official metric</span></div>
+                <p>The final ranking score combines semantic perception and higher-level reasoning, with conditional Layer-2 accuracy receiving half of the total weight.</p>
+              </div>
+              <div className="metric__formula" aria-label="Overall score formula">
+                <BlockMath math={scoreFormula} />
+              </div>
+              <div className="score-components" aria-label="Score component definitions">
+                <div><strong>A<sub>L1</sub></strong><span>Layer-1 accuracy</span></div>
+                <div><strong>A<sub>L2</sub></strong><span>Layer-2 accuracy</span></div>
+                <div><strong>A<sub>CL2</sub></strong><span>Conditional Layer-2 accuracy</span></div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -759,6 +716,31 @@ export default function App() {
                 </article>
               ))}
             </div>
+            <article className="guidelines-card" aria-labelledby="guidelines-title">
+              <div className="guidelines-card__heading">
+                <CheckCircle2 aria-hidden="true" />
+                <div>
+                  <span className="mini-label">Challenge policy</span>
+                  <h3 id="guidelines-title">Participation Guidelines</h3>
+                </div>
+              </div>
+              <div className="guidelines-card__copy">
+                <p>
+                  External data and pretrained models are permitted, but every external resource
+                  must be declared in the system report. Manual annotation or modification of
+                  development or evaluation data is prohibited, as is the use of hidden labels,
+                  hidden metadata, or evaluation-set leakage. Any signal-processing, spatial-audio,
+                  machine-learning, or LALM approach may be used, provided predictions follow the
+                  official format.
+                </p>
+                <p>
+                  Submissions must include answer files for the official evaluation set, a brief
+                  system description, and a list of external data and pretrained models. The
+                  organizing committee will assess compliance from the submitted report and may
+                  request reproduction materials when necessary.
+                </p>
+              </div>
+            </article>
           </div>
         </section>
 
