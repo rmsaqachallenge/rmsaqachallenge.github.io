@@ -169,8 +169,8 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
         <rect className="diagram-bar" x="232" y="14" width="72" height="12" rx="6" />
         <rect className="diagram-bar" x="96" y="47" width="208" height="12" rx="6" />
         <rect className="diagram-bar" x="152" y="80" width="112" height="12" rx="6" />
-        <line className="diagram-highlight diagram-dash" x1="200" y1="7" x2="200" y2="101" />
-        <text className="diagram-accent-label" x="207" y="116">3 simultaneous</text>
+        <line className="diagram-highlight diagram-dash" x1="176" y1="7" x2="176" y2="101" />
+        <text className="diagram-accent-label" x="176" y="116" textAnchor="middle">3 simultaneous</text>
       </svg>
     );
   }
@@ -187,10 +187,12 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
             <text className="diagram-tick-label" x={x - 5} y="82">{index * 2}</text>
           </g>
         ))}
-        <rect className="diagram-highlight" x="188" y="49" width="18" height="22" rx="5" />
-        <text className="diagram-strong-label" x="168" y="24">onset 4.3 s</text>
-        <text className="diagram-strong-label" x="221" y="39">offset 4.8 s</text>
-        <text className="diagram-accent-label" x="178" y="108">duration 0.5 s</text>
+        <rect className="diagram-highlight" x="191" y="49" width="10" height="22" rx="5" />
+        <line className="diagram-highlight diagram-dash" x1="191" y1="29" x2="191" y2="73" />
+        <line className="diagram-highlight diagram-dash" x1="201" y1="29" x2="201" y2="73" />
+        <text className="diagram-strong-label" x="187" y="24" textAnchor="end">onset 4.3 s</text>
+        <text className="diagram-strong-label" x="205" y="24" textAnchor="start">offset 4.8 s</text>
+        <text className="diagram-accent-label" x="196" y="108" textAnchor="middle">duration 0.5 s</text>
       </svg>
     );
   }
