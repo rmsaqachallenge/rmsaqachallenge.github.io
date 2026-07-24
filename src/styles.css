@@ -387,11 +387,15 @@ svg {
 .hero h1 {
   margin-bottom: 0;
   color: var(--text);
-  font-size: clamp(2rem, 3.02vw, 2.72rem);
+  font-size: var(--hero-title-size, clamp(2rem, 3.02vw, 2.72rem));
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.052em;
   white-space: nowrap;
+}
+
+.hero__title-text {
+  display: inline-block;
 }
 
 .hero__title-primary,
@@ -1544,6 +1548,10 @@ svg {
     font-size: clamp(2.55rem, 7vw, 3.75rem);
     line-height: 1.02;
     white-space: normal;
+  }
+
+  .hero__title-text {
+    display: contents;
   }
 
   .hero__actions,

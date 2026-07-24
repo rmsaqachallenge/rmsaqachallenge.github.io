@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -379,6 +379,58 @@ function MetricNotation({ metric }: { metric: string }) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("overview");
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const heroVisualRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const title = heroTitleRef.current;
+    const content = heroContentRef.current;
+    const audioField = heroVisualRef.current?.querySelector<HTMLElement>(".audio-field");
+    const titleText = title?.querySelector<HTMLElement>(".hero__title-text");
+
+    if (!title || !content || !audioField || !titleText) return;
+
+    const desktopLayout = window.matchMedia("(min-width: 901px)");
+    let animationFrame = 0;
+    let active = true;
+
+    const fitTitle = () => {
+      if (!active) return;
+
+      if (!desktopLayout.matches) {
+        title.style.removeProperty("--hero-title-size");
+        return;
+      }
+
+      const contentLeft = content.getBoundingClientRect().left;
+      const imageRight = audioField.getBoundingClientRect().right;
+      const currentTextWidth = titleText.getBoundingClientRect().width;
+      const currentFontSize = Number.parseFloat(window.getComputedStyle(title).fontSize);
+      const targetWidth = imageRight - contentLeft;
+
+      if (currentTextWidth <= 0 || currentFontSize <= 0 || targetWidth <= 0) return;
+
+      const fittedSize = currentFontSize * (targetWidth / currentTextWidth);
+      const safeSize = Math.min(54, Math.max(32, fittedSize));
+      title.style.setProperty("--hero-title-size", `${safeSize.toFixed(3)}px`);
+    };
+
+    const scheduleTitleFit = () => {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(fitTitle);
+    };
+
+    fitTitle();
+    window.addEventListener("resize", scheduleTitleFit);
+    document.fonts?.ready.then(scheduleTitleFit);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", scheduleTitleFit);
+    };
+  }, []);
 
   useEffect(() => {
     const sectionIds = navItems.map((item) => item.href.slice(1));
@@ -487,12 +539,14 @@ export default function App() {
           <div className="container hero__inner">
             <div className="hero__title-block">
               <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Grand Challenge</div>
-              <h1>
-                <span className="hero__title-primary">Real-world Multi‑channel</span>{" "}
-                <span className="hero__title-accent">Spatial Audio Understanding</span>
+              <h1 ref={heroTitleRef}>
+                <span className="hero__title-text">
+                  <span className="hero__title-primary">Real-world Multi‑channel</span>{" "}
+                  <span className="hero__title-accent">Spatial Audio Understanding</span>
+                </span>
               </h1>
             </div>
-            <div className="hero__content">
+            <div className="hero__content" ref={heroContentRef}>
               <p className="hero__lead">
                 A unified benchmark for understanding <em>what happened</em>, <em>when</em> and
                 <em> where</em> it occurred, how events relate, and <em>what to do next</em> in
@@ -512,7 +566,7 @@ export default function App() {
                 <div><strong>6 categories</strong><span>Understanding tasks</span></div>
               </div>
             </div>
-            <div className="hero__visual">
+            <div className="hero__visual" ref={heroVisualRef}>
               <AudioField />
             </div>
           </div>
