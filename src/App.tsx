@@ -282,9 +282,7 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
 function AudioField() {
   return (
     <div className="audio-field" aria-hidden="true">
-      <div className="audio-field__halo audio-field__halo--one" />
-      <div className="audio-field__halo audio-field__halo--two" />
-      <svg className="audio-field__svg" viewBox="0 0 620 620" fill="none">
+      <svg className="audio-field__svg" viewBox="70 70 480 480" fill="none">
         <defs>
           <radialGradient id="sphereFill" cx="0" cy="0" r="1" gradientTransform="translate(310 310) rotate(90) scale(235)">
             <stop offset="0" stopColor="#58E3C3" stopOpacity=".15" />
@@ -401,7 +399,7 @@ export default function App() {
       if (!active) return;
 
       if (!desktopLayout.matches) {
-        title.style.removeProperty("--hero-title-size");
+        document.documentElement.style.removeProperty("--display-title-size");
         return;
       }
 
@@ -415,7 +413,7 @@ export default function App() {
 
       const fittedSize = currentFontSize * (targetWidth / currentTextWidth);
       const safeSize = Math.min(54, Math.max(32, fittedSize));
-      title.style.setProperty("--hero-title-size", `${safeSize.toFixed(3)}px`);
+      document.documentElement.style.setProperty("--display-title-size", `${safeSize.toFixed(3)}px`);
     };
 
     const scheduleTitleFit = () => {
@@ -431,6 +429,7 @@ export default function App() {
       active = false;
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("resize", scheduleTitleFit);
+      document.documentElement.style.removeProperty("--display-title-size");
     };
   }, []);
 
@@ -649,7 +648,7 @@ export default function App() {
               <article>
                 <span>14 h</span>
                 <h3>Real-source audio</h3>
-                <p>Recordings built from real sound sources and sampled at 16 kHz.</p>
+                <p>Captured with a Zoom H3‑VR from real sound sources and provided at 16 kHz.</p>
               </article>
               <article>
                 <span>166K</span>
@@ -669,6 +668,8 @@ export default function App() {
                 cues required to reason about direction, distance, motion, and relationships among
                 sources. The combination of extensive simulation and real-source material supports
                 both controlled coverage and evaluation under more realistic acoustic conditions.
+                The real-source recordings were captured with a Zoom H3‑VR and are provided at
+                16 kHz.
               </p>
               <p>
                 Each record follows the same hierarchical question-answering structure. At

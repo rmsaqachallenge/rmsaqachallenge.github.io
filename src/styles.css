@@ -22,6 +22,7 @@
   --header-height: 68px;
   --container: 1180px;
   --section-content: 1180px;
+  --display-title-size: clamp(2rem, 3.02vw, 2.72rem);
 }
 
 * {
@@ -387,7 +388,7 @@ svg {
 .hero h1 {
   margin-bottom: 0;
   color: var(--text);
-  font-size: var(--hero-title-size, clamp(2rem, 3.02vw, 2.72rem));
+  font-size: var(--display-title-size);
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.052em;
@@ -508,31 +509,13 @@ svg {
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(0, 113, 227, 0.1);
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff 0 44%, rgba(255, 255, 255, 0.72) 68%, rgba(255, 255, 255, 0) 69%);
+  background: transparent;
   filter: drop-shadow(0 30px 60px rgba(0, 54, 108, 0.12));
 }
 
 .audio-field__svg {
   width: 100%;
   height: 100%;
-}
-
-.audio-field__halo {
-  position: absolute;
-  border: 1px solid rgba(0, 113, 227, 0.09);
-  border-radius: 50%;
-}
-
-.audio-field__halo--one {
-  width: 79%;
-  height: 79%;
-}
-
-.audio-field__halo--two {
-  width: 91%;
-  height: 91%;
 }
 
 .audio-field__label {
@@ -619,7 +602,7 @@ svg {
   padding-bottom: 43px;
   border-bottom: 1px solid var(--border-strong);
   color: var(--text);
-  font-size: clamp(3rem, 5vw, 4.65rem);
+  font-size: var(--display-title-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.055em;
@@ -669,7 +652,7 @@ svg {
 .section-heading h2 {
   margin-bottom: 25px;
   color: var(--text);
-  font-size: clamp(2.9rem, 5vw, 4.65rem);
+  font-size: var(--display-title-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.055em;
@@ -1583,6 +1566,10 @@ svg {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --display-title-size: clamp(2.55rem, 7vw, 3.75rem);
+  }
+
   .section {
     padding: 110px 0;
   }
@@ -1613,7 +1600,6 @@ svg {
   .hero h1 {
     max-width: 760px;
     margin-inline: auto;
-    font-size: clamp(2.55rem, 7vw, 3.75rem);
     line-height: 1.02;
     white-space: normal;
   }
@@ -1662,6 +1648,7 @@ svg {
 @media (max-width: 640px) {
   :root {
     --header-height: 64px;
+    --display-title-size: clamp(2.7rem, 12vw, 3.6rem);
   }
 
   .container {
@@ -1675,7 +1662,6 @@ svg {
   .participation h2 {
     margin-bottom: 32px;
     padding-bottom: 32px;
-    font-size: clamp(2.5rem, 11vw, 3.2rem);
     line-height: 1.03;
   }
 
@@ -1697,7 +1683,6 @@ svg {
   }
 
   .hero h1 {
-    font-size: clamp(2.7rem, 12vw, 3.6rem);
     line-height: 0.98;
   }
 
@@ -1763,7 +1748,6 @@ svg {
   }
 
   .section-heading h2 {
-    font-size: clamp(2.45rem, 11vw, 3.2rem);
     line-height: 1.03;
   }
 
