@@ -678,7 +678,6 @@ export default function App() {
               description="Free-text outputs are normalized and mapped to reference labels through deterministic rule-based post-processing before the official score is calculated."
             />
             <article className="metric metric--score">
-              <div className="metric__index">01</div>
               <div className="metric__content">
                 <div className="metric__title"><h3>Overall Score</h3><span>Official metric</span></div>
                 <p>The final ranking score combines semantic perception and higher-level reasoning, with conditional Layer-2 accuracy receiving half of the total weight.</p>
@@ -715,32 +714,30 @@ export default function App() {
                   <div className="coming-soon coming-soon--static"><CalendarClock size={14} /> Coming soon</div>
                 </article>
               ))}
-            </div>
-            <article className="guidelines-card" aria-labelledby="guidelines-title">
-              <div className="guidelines-card__heading">
-                <CheckCircle2 aria-hidden="true" />
-                <div>
-                  <span className="mini-label">Challenge policy</span>
+              <article className="resource-row resource-row--guidelines" aria-labelledby="guidelines-title">
+                <div className="resource-row__guidelines-header">
+                  <div className="resource-row__index">04</div>
+                  <div className="resource-row__icon"><CheckCircle2 aria-hidden="true" /></div>
                   <h3 id="guidelines-title">Participation Guidelines</h3>
                 </div>
-              </div>
-              <div className="guidelines-card__copy">
-                <p>
-                  External data and pretrained models are permitted, but every external resource
-                  must be declared in the system report. Manual annotation or modification of
-                  development or evaluation data is prohibited, as is the use of hidden labels,
-                  hidden metadata, or evaluation-set leakage. Any signal-processing, spatial-audio,
-                  machine-learning, or LALM approach may be used, provided predictions follow the
-                  official format.
-                </p>
-                <p>
-                  Submissions must include answer files for the official evaluation set, a brief
-                  system description, and a list of external data and pretrained models. The
-                  organizing committee will assess compliance from the submitted report and may
-                  request reproduction materials when necessary.
-                </p>
-              </div>
-            </article>
+                <div className="resource-row__guidelines-copy">
+                  <p>
+                    External data and pretrained models are permitted, but every external resource
+                    must be declared in the system report. Manual annotation or modification of
+                    development or evaluation data is prohibited, as is the use of hidden labels,
+                    hidden metadata, or evaluation-set leakage. Any signal-processing, spatial-audio,
+                    machine-learning, or LALM approach may be used, provided predictions follow the
+                    official format.
+                  </p>
+                  <p>
+                    Submissions must include answer files for the official evaluation set, a brief
+                    system description, and a list of external data and pretrained models. The
+                    organizing committee will assess compliance from the submitted report and may
+                    request reproduction materials when necessary.
+                  </p>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 

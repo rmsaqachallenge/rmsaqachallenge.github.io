@@ -680,7 +680,6 @@ svg {
 .dataset-specs,
 .taxonomy-block,
 .resources-list,
-.guidelines-card,
 .timeline-list,
 .license-card,
 .organizer-card {
@@ -1180,6 +1179,10 @@ svg {
   border-radius: 28px;
 }
 
+.metric--score {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .metric__index {
   padding-top: 8px;
 }
@@ -1340,54 +1343,30 @@ svg {
   white-space: nowrap;
 }
 
-.guidelines-card {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.6fr);
-  gap: 44px;
-  margin-top: 32px;
-  padding: 36px 40px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: var(--page);
-  box-shadow: var(--shadow-sm);
-}
-
-.guidelines-card__heading {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.guidelines-card__heading > svg {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 auto;
-  padding: 10px;
-  border-radius: 13px;
-  background: rgba(0, 143, 122, 0.09);
-  color: var(--teal);
-}
-
-.guidelines-card .mini-label {
+.resource-row--guidelines {
   display: block;
-  margin-bottom: 8px;
-  color: var(--teal);
+  padding-block: 30px;
 }
 
-.guidelines-card h3 {
+.resource-row__guidelines-header {
+  display: grid;
+  grid-template-columns: 42px 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 21px;
+}
+
+.resource-row__guidelines-header h3 {
   margin-bottom: 0;
-  color: var(--text);
-  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
-  font-weight: 650;
-  letter-spacing: -0.035em;
+  white-space: nowrap;
 }
 
-.guidelines-card__copy {
+.resource-row__guidelines-copy {
   display: grid;
   gap: 18px;
+  margin-top: 24px;
 }
 
-.guidelines-card__copy p {
+.resource-row__guidelines-copy p {
   margin-bottom: 0;
   color: var(--text-secondary);
   font-size: 0.96rem;
@@ -1934,15 +1913,26 @@ svg {
     margin-top: -15px;
   }
 
-  .guidelines-card {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    margin-top: 24px;
-    padding: 28px 22px;
-    border-radius: 22px;
+  .resource-row--guidelines {
+    padding-block: 24px;
   }
 
-  .guidelines-card__copy p {
+  .resource-row__guidelines-header {
+    grid-template-columns: 35px 49px minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .resource-row__guidelines-header h3 {
+    font-size: clamp(0.96rem, 4.5vw, 1.2rem);
+    letter-spacing: -0.035em;
+  }
+
+  .resource-row__guidelines-copy {
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .resource-row__guidelines-copy p {
     font-size: 1rem;
     line-height: 1.7;
   }
