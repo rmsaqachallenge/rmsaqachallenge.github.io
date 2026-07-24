@@ -12,6 +12,7 @@ import {
   Mail,
   Menu,
   Network,
+  ShieldCheck,
   Sparkles,
   X,
 } from "lucide-react";
@@ -717,7 +718,7 @@ export default function App() {
               <article className="resource-row resource-row--guidelines" aria-labelledby="guidelines-title">
                 <div className="resource-row__guidelines-header">
                   <div className="resource-row__index">04</div>
-                  <div className="resource-row__icon"><CheckCircle2 aria-hidden="true" /></div>
+                  <div className="resource-row__icon"><ShieldCheck aria-hidden="true" /></div>
                   <h3 id="guidelines-title">Participation Guidelines</h3>
                 </div>
                 <div className="resource-row__guidelines-copy">
