@@ -1,4 +1,4 @@
-name: Deploy EARS website to GitHub Pages
+name: Deploy RMSAU website to GitHub Pages
 
 on:
   push:
