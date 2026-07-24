@@ -120,6 +120,11 @@ const resources: Array<{
     description: "Submission format, evaluation server, and participation rules are forthcoming.",
     icon: FileQuestion,
   },
+  {
+    title: "Participation Guidelines",
+    description: "Official participation rules and reporting requirements will be published here.",
+    icon: ShieldCheck,
+  },
 ];
 
 function RmsauMark() {
@@ -709,35 +714,12 @@ export default function App() {
                   <div className="resource-row__index">{String(index + 1).padStart(2, "0")}</div>
                   <div className="resource-row__icon"><Icon /></div>
                   <div className="resource-row__content">
-                    <h3>{title}</h3>
+                    <h3 className={title === "Participation Guidelines" ? "resource-row__title--nowrap" : undefined}>{title}</h3>
                     <p>{description}</p>
                   </div>
                   <div className="coming-soon coming-soon--static"><CalendarClock size={14} /> Coming soon</div>
                 </article>
               ))}
-              <article className="resource-row resource-row--guidelines" aria-labelledby="guidelines-title">
-                <div className="resource-row__guidelines-header">
-                  <div className="resource-row__index">04</div>
-                  <div className="resource-row__icon"><ShieldCheck aria-hidden="true" /></div>
-                  <h3 id="guidelines-title">Participation Guidelines</h3>
-                </div>
-                <div className="resource-row__guidelines-copy">
-                  <p>
-                    External data and pretrained models are permitted, but every external resource
-                    must be declared in the system report. Manual annotation or modification of
-                    development or evaluation data is prohibited, as is the use of hidden labels,
-                    hidden metadata, or evaluation-set leakage. Any signal-processing, spatial-audio,
-                    machine-learning, or LALM approach may be used, provided predictions follow the
-                    official format.
-                  </p>
-                  <p>
-                    Submissions must include answer files for the official evaluation set, a brief
-                    system description, and a list of external data and pretrained models. The
-                    organizing committee will assess compliance from the submitted report and may
-                    request reproduction materials when necessary.
-                  </p>
-                </div>
-              </article>
             </div>
           </div>
         </section>

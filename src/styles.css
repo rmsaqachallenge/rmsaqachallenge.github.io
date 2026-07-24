@@ -1334,6 +1334,10 @@ svg {
   font-size: 1.2rem;
 }
 
+.resource-row h3.resource-row__title--nowrap {
+  white-space: nowrap;
+}
+
 .coming-soon {
   min-height: 34px;
   padding: 0 12px;
@@ -1341,41 +1345,6 @@ svg {
   background: rgba(255, 255, 255, 0.65);
   color: var(--text-muted);
   white-space: nowrap;
-}
-
-.resource-row--guidelines {
-  display: block;
-  padding-block: 30px;
-}
-
-.resource-row__guidelines-header {
-  display: grid;
-  grid-template-columns: 42px 54px minmax(0, 1fr);
-  align-items: center;
-  gap: 21px;
-}
-
-.resource-row__guidelines-header h3 {
-  margin-bottom: 0;
-  white-space: nowrap;
-}
-
-.resource-row__guidelines-copy {
-  display: grid;
-  gap: 18px;
-  margin-top: 24px;
-}
-
-.resource-row__guidelines-copy p {
-  margin-bottom: 0;
-  color: var(--text-secondary);
-  font-size: 0.96rem;
-  line-height: 1.68;
-  hyphens: auto;
-  overflow-wrap: break-word;
-  text-align: justify;
-  text-align-last: left;
-  text-justify: inter-word;
 }
 
 .timeline-list {
@@ -1904,6 +1873,11 @@ svg {
     grid-column: 3;
   }
 
+  .resource-row h3.resource-row__title--nowrap {
+    font-size: clamp(0.96rem, 4.5vw, 1.2rem);
+    letter-spacing: -0.035em;
+  }
+
   .coming-soon--static {
     grid-column: 3;
     justify-self: start;
@@ -1911,30 +1885,6 @@ svg {
 
   .resources .status-pill {
     margin-top: -15px;
-  }
-
-  .resource-row--guidelines {
-    padding-block: 24px;
-  }
-
-  .resource-row__guidelines-header {
-    grid-template-columns: 35px 49px minmax(0, 1fr);
-    gap: 13px;
-  }
-
-  .resource-row__guidelines-header h3 {
-    font-size: clamp(0.96rem, 4.5vw, 1.2rem);
-    letter-spacing: -0.035em;
-  }
-
-  .resource-row__guidelines-copy {
-    gap: 16px;
-    margin-top: 22px;
-  }
-
-  .resource-row__guidelines-copy p {
-    font-size: 1rem;
-    line-height: 1.7;
   }
 
   .timeline-row {
