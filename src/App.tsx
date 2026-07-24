@@ -570,9 +570,33 @@ export default function App() {
               <AudioField />
             </div>
           </div>
-          <a className="scroll-cue" href="#overview" aria-label="Scroll to challenge overview">
+          <a className="scroll-cue" href="#participation" aria-label="Scroll to call for participation">
             <span>Discover RMSAU</span><ArrowDown size={16} />
           </a>
+        </section>
+
+        <section className="participation section section--raised" id="participation" aria-labelledby="participation-title">
+          <div className="container">
+            <h2 id="participation-title">Call for Participation</h2>
+            <div className="participation__copy">
+              <p>
+                We invite researchers in spatial audio, acoustic scene understanding, multimodal
+                learning, and embodied intelligence to help establish a shared benchmark for
+                reasoning in real-world smart homes. Progress in this area requires systems that
+                move beyond detecting isolated sound events to understand when and where events
+                occur, how they relate, and what response a situated agent should take.
+              </p>
+              <p>
+                By participating, teams will help advance robust multichannel perception,
+                hierarchical reasoning, and safety-aware decision making under both simulated and
+                real-source conditions. We welcome approaches spanning signal processing,
+                audio-language modeling, spatial representation learning, and general-purpose
+                foundation models, using this challenge as common ground for comparing ideas and
+                identifying the capabilities still needed for trustworthy embodied audio
+                intelligence.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section className="overview section" id="overview">
