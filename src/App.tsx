@@ -580,20 +580,21 @@ export default function App() {
             <h2 id="participation-title">Call for Participation</h2>
             <div className="participation__copy">
               <p>
-                We invite researchers in spatial audio, acoustic scene understanding, multimodal
-                learning, and embodied intelligence to help establish a shared benchmark for
-                reasoning in real-world smart homes. Progress in this area requires systems that
-                move beyond detecting isolated sound events to understand when and where events
-                occur, how they relate, and what response a situated agent should take.
+                Despite rapid progress in audio understanding, most systems still focus on
+                isolated recognition tasks that identify what sounds are present but provide
+                limited insight into when and where events occur, how they interact, or what
+                action should follow. This limitation is especially significant in smart homes,
+                where acoustic scenes are dynamic, spatially distributed, and sometimes
+                safety-critical. Embodied intelligence therefore requires a unified understanding
+                of sound, space, time, and context.
               </p>
               <p>
-                By participating, teams will help advance robust multichannel perception,
-                hierarchical reasoning, and safety-aware decision making under both simulated and
-                real-source conditions. We welcome approaches spanning signal processing,
-                audio-language modeling, spatial representation learning, and general-purpose
-                foundation models, using this challenge as common ground for comparing ideas and
-                identifying the capabilities still needed for trustworthy embodied audio
-                intelligence.
+                RMSAU addresses this gap through a unified challenge for real-world multichannel
+                spatial audio understanding. By connecting semantic perception with temporal and
+                spatial reasoning and context-aware action, the challenge provides common ground
+                for measuring progress toward reliable and responsible smart-home agents. We
+                invite you to participate, share new ideas, and help advance intelligent systems
+                that can listen, reason, and act in the physical world.
               </p>
             </div>
           </div>
