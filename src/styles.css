@@ -23,6 +23,7 @@
   --container: 1180px;
   --section-content: 1180px;
   --display-title-size: clamp(2rem, 3.02vw, 2.72rem);
+  --section-block-space: 96px;
 }
 
 * {
@@ -579,7 +580,7 @@ svg {
 }
 
 .section {
-  padding: 138px 0;
+  padding: var(--section-block-space) 0;
   background: var(--page);
 }
 
@@ -1352,11 +1353,11 @@ svg {
 }
 
 .timeline-row {
-  min-height: 110px;
+  min-height: 88px;
   display: grid;
   grid-template-columns: 65px minmax(0, 1fr) minmax(150px, auto);
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -1582,10 +1583,7 @@ svg {
 @media (max-width: 900px) {
   :root {
     --display-title-size: clamp(2.55rem, 7vw, 3.75rem);
-  }
-
-  .section {
-    padding: 110px 0;
+    --section-block-space: 80px;
   }
 
   .hero {
@@ -1663,14 +1661,11 @@ svg {
   :root {
     --header-height: 64px;
     --display-title-size: clamp(2.7rem, 12vw, 3.6rem);
+    --section-block-space: 64px;
   }
 
   .container {
     width: min(calc(100% - 30px), var(--container));
-  }
-
-  .section {
-    padding: 88px 0;
   }
 
   .participation h2 {
@@ -1889,7 +1884,8 @@ svg {
 
   .timeline-row {
     grid-template-columns: 53px minmax(0, 1fr);
-    padding: 20px 0;
+    gap: 8px 12px;
+    padding: 12px 0;
   }
 
   .timeline-date {

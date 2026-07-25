@@ -54,8 +54,8 @@ const categories: Array<{
   {
     title: "Temporal Detection",
     description: "Detect when a sound starts, when it ends, and how long it remains active within the 10-second clip.",
-    question: "From what you hear, what time span does the object impact cover?",
-    answer: "The active interval for the object impact runs from 4.3 s to 4.8 s.",
+    question: "From what you hear, what time span does the sound of the object impact cover?",
+    answer: "The sound of the object impact is active from 4.3 s to 4.8 s.",
     visual: "detection",
     group: "temporal",
     index: "02",
@@ -63,8 +63,8 @@ const categories: Array<{
   {
     title: "Temporal Relation",
     description: "Determine whether two sounds occur before, after, during, or overlapping with one another.",
-    question: "Is the entire object impact contained within the duration of the toy train?",
-    answer: "From the interval boundaries, the toy train time span fully contains the full duration of the object impact.",
+    question: "How does the duration of the sound of the object impact relate to the sound of the toy train?",
+    answer: "The sound of the toy train fully contains the sound of the object impact within its duration.",
     visual: "temporal",
     group: "temporal",
     index: "03",
@@ -72,8 +72,8 @@ const categories: Array<{
   {
     title: "Spatial Location",
     description: "Assign one sound source to one of eight discrete directions relative to the robot.",
-    question: "Where is the television relative to the robot?",
-    answer: "Spatially, the television is positioned toward the rear-left of the robot.",
+    question: "From which direction relative to the robot does the sound of the television originate?",
+    answer: "The sound of the television originates from the rear-left of the robot.",
     visual: "location",
     group: "spatial",
     index: "04",
@@ -81,8 +81,8 @@ const categories: Array<{
   {
     title: "Spatial Relation",
     description: "Compare the relative position of one sound source with another sound source.",
-    question: "Where is the air conditioner relative to the television?",
-    answer: "The relative position places the air conditioner to the right of and behind the television.",
+    question: "Relative to the sound of the television, from which direction does the sound of the air conditioner originate?",
+    answer: "The sound of the air conditioner originates to the right of and behind the sound of the television.",
     visual: "spatial",
     group: "spatial",
     index: "05",
@@ -165,8 +165,8 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
   if (kind === "detection") {
     return (
       <svg {...commonProps}>
-        <title>Object impact onset, offset, and duration</title>
-        <text className="diagram-label" x="8" y="53">Object impact</text>
+        <title>Onset, offset, and duration of an object-impact sound</title>
+        <text className="diagram-label" x="8" y="53">Impact sound</text>
         <line className="diagram-axis" x1="104" y1="60" x2="306" y2="60" />
         {[104, 144, 184, 224, 264, 306].map((x, index) => (
           <g key={x}>
@@ -187,9 +187,9 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
   if (kind === "temporal") {
     return (
       <svg {...commonProps}>
-        <title>Object impact contained within the toy train duration</title>
-        <text className="diagram-label" x="8" y="38">Toy train</text>
-        <text className="diagram-label" x="8" y="83">Object impact</text>
+        <title>Object-impact sound contained within the toy-train sound</title>
+        <text className="diagram-label" x="8" y="38">Train sound</text>
+        <text className="diagram-label" x="8" y="83">Impact sound</text>
         <line className="diagram-axis" x1="105" y1="99" x2="306" y2="99" />
         <rect className="diagram-bar" x="130" y="25" width="138" height="14" rx="7" />
         <rect className="diagram-highlight" x="191" y="70" width="18" height="18" rx="5" />
@@ -205,7 +205,7 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
   if (kind === "location") {
     return (
       <svg {...commonProps}>
-        <title>Television located to the rear-left of the robot</title>
+        <title>Television sound originating to the rear-left of the robot</title>
         <circle className="diagram-orbit" cx="160" cy="61" r="43" />
         <line className="diagram-axis" x1="160" y1="13" x2="160" y2="109" />
         <line className="diagram-axis" x1="112" y1="61" x2="208" y2="61" />
@@ -214,7 +214,7 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
         <circle className="diagram-robot" cx="160" cy="61" r="19" />
         <text className="diagram-robot-label" x="160" y="65" textAnchor="middle">Robot</text>
         <path className="diagram-facing" d="M160 14 L156 21 H164 Z" />
-        <text className="diagram-accent-label" x="94" y="104">rear-left · TV</text>
+        <text className="diagram-accent-label" x="82" y="104">rear-left · TV sound</text>
         <text className="diagram-tick-label" x="149" y="10">front</text>
         <text className="diagram-tick-label" x="149" y="120">rear</text>
         <text className="diagram-tick-label" x="87" y="65">left</text>
@@ -226,7 +226,7 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
   if (kind === "spatial") {
     return (
       <svg {...commonProps}>
-        <title>Air conditioner positioned right of and behind the television</title>
+        <title>Air-conditioner sound originating right of and behind the television sound</title>
         <circle className="diagram-orbit" cx="160" cy="55" r="33" />
         <line className="diagram-axis" x1="160" y1="14" x2="160" y2="105" />
         <line className="diagram-axis" x1="112" y1="55" x2="208" y2="55" />
@@ -236,8 +236,8 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
         <rect className="diagram-source" x="90" y="78" width="30" height="18" rx="4" />
         <rect className="diagram-highlight" x="226" y="88" width="34" height="18" rx="4" />
         <path className="diagram-relation-arrow" d="M123 87 C155 72 200 76 226 97" />
-        <text className="diagram-label" x="80" y="114">Television</text>
-        <text className="diagram-accent-label" x="212" y="118">Air conditioner</text>
+        <text className="diagram-label" x="78" y="114">TV sound</text>
+        <text className="diagram-accent-label" x="210" y="118">A/C sound</text>
         <text className="diagram-tick-label" x="194" y="75">right + behind</text>
         <text className="diagram-axis-label" x="148" y="10">Front</text>
         <text className="diagram-axis-label" x="148" y="120">Rear</text>
