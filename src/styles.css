@@ -597,8 +597,8 @@ svg {
 }
 
 .participation h2 {
-  margin-bottom: 43px;
-  padding-bottom: 43px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border-strong);
   color: var(--text);
   font-size: var(--display-title-size);
@@ -629,8 +629,8 @@ svg {
 
 .section-heading {
   max-width: var(--section-content);
-  margin-bottom: 43px;
-  padding-bottom: 43px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border-strong);
 }
 
@@ -649,7 +649,7 @@ svg {
 }
 
 .section-heading h2 {
-  margin-bottom: 25px;
+  margin-bottom: 16px;
   color: var(--text);
   font-size: var(--display-title-size);
   font-weight: 700;
@@ -1310,7 +1310,7 @@ svg {
 
 .timeline .section-heading {
   margin-bottom: 0;
-  padding-bottom: 28px;
+  padding-bottom: 20px;
   border-bottom: 0;
 }
 
@@ -1614,8 +1614,8 @@ svg {
   }
 
   .participation h2 {
-    margin-bottom: 32px;
-    padding-bottom: 32px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
     line-height: 1.03;
   }
 
@@ -1697,8 +1697,8 @@ svg {
   }
 
   .section-heading {
-    margin-bottom: 32px;
-    padding-bottom: 32px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
   }
 
   .section-heading h2 {
@@ -1749,7 +1749,7 @@ svg {
   }
 
   .timeline .section-heading {
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
 
   .category-card {
