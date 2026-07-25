@@ -23,7 +23,7 @@
   --container: 1180px;
   --section-content: 1180px;
   --display-title-size: clamp(2rem, 3.02vw, 2.72rem);
-  --section-block-space: 80px;
+  --section-block-space: 64px;
 }
 
 * {
@@ -1532,7 +1532,7 @@ svg {
 @media (max-width: 900px) {
   :root {
     --display-title-size: clamp(2.55rem, 7vw, 3.75rem);
-    --section-block-space: 64px;
+    --section-block-space: 56px;
   }
 
   .hero {
@@ -1606,7 +1606,7 @@ svg {
   :root {
     --header-height: 64px;
     --display-title-size: clamp(2.7rem, 12vw, 3.6rem);
-    --section-block-space: 48px;
+    --section-block-space: 40px;
   }
 
   .container {
