@@ -736,7 +736,7 @@ svg {
 }
 
 .dataset-details {
-  max-width: 1040px;
+  max-width: var(--section-content);
   margin-bottom: 40px;
 }
 
@@ -762,7 +762,14 @@ svg {
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.72;
-  text-align: left;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  overflow-wrap: break-word;
+  word-break: normal;
+  word-spacing: -0.012em;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
   text-wrap: wrap;
 }
 
@@ -1246,17 +1253,17 @@ svg {
 }
 
 .resource-sections {
-  max-width: 1040px;
+  max-width: var(--section-content);
 }
 
 .resource-subsection + .resource-subsection {
-  margin-top: 32px;
-  padding-top: 32px;
+  margin-top: 24px;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
 .resource-subsection h3 {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--text);
   font-size: clamp(1.35rem, 2vw, 1.7rem);
   font-weight: 650;
@@ -1265,16 +1272,25 @@ svg {
 }
 
 .resource-subsection p {
-  max-width: 980px;
-  margin-bottom: 14px;
+  max-width: none;
+  margin-bottom: 10px;
   color: var(--text-secondary);
   font-size: 1.03rem;
   line-height: 1.68;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  overflow-wrap: break-word;
+  word-break: normal;
+  word-spacing: -0.012em;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  text-wrap: wrap;
 }
 
 .resource-pending-list {
   display: grid;
-  gap: 5px;
+  gap: 4px;
 }
 
 .resource-subsection .resource-pending {
@@ -1720,8 +1736,8 @@ svg {
   }
 
   .resource-subsection + .resource-subsection {
-    margin-top: 26px;
-    padding-top: 26px;
+    margin-top: 20px;
+    padding-top: 20px;
   }
 
   .resource-subsection h3 {
