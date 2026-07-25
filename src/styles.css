@@ -361,8 +361,6 @@ svg {
 }
 
 .conference-pill,
-.status-pill,
-.coming-soon,
 .mini-label,
 .eyebrow {
   font-size: 0.72rem;
@@ -679,9 +677,8 @@ svg {
 .overview-narrative,
 .dataset-details,
 .taxonomy-block,
-.resources-list,
+.resource-sections,
 .timeline-list,
-.license-card,
 .organizer-card {
   width: 100%;
   max-width: var(--section-content);
@@ -705,13 +702,12 @@ svg {
 }
 
 .overview-narrative p:last-child,
-.license-card p:last-child {
+.resource-subsection p:last-child {
   margin-bottom: 0;
 }
 
 .category-card,
 .metric,
-.resource-row,
 .organizer-card {
   border: 1px solid var(--border);
   background: var(--surface);
@@ -719,13 +715,11 @@ svg {
 }
 
 .section--raised .category-card,
-.section--raised .resource-row,
-.section--raised .license-card {
+.section--raised .category-card {
   background: var(--page);
 }
 
 .category-card h3,
-.resource-row h3,
 .timeline-row h3,
 .organizer-card h3 {
   color: var(--text);
@@ -734,7 +728,6 @@ svg {
 }
 
 .category-card p,
-.resource-row p,
 .organizer-card p {
   margin-bottom: 0;
   color: var(--text-secondary);
@@ -743,6 +736,7 @@ svg {
 }
 
 .dataset-details {
+  max-width: 1040px;
   margin-bottom: 40px;
 }
 
@@ -762,19 +756,37 @@ svg {
 }
 
 .dataset-subsection p,
-.license-card p {
+.dataset-facts {
   max-width: none;
   margin-bottom: 18px;
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.72;
-  text-align: justify;
-  text-align-last: left;
-  text-justify: inter-word;
+  text-align: left;
   text-wrap: wrap;
 }
 
-.dataset-subsection strong {
+.dataset-subsection__intro {
+  color: var(--text);
+}
+
+.dataset-facts {
+  display: grid;
+  gap: 9px;
+  margin-top: 0;
+  padding-left: 1.35rem;
+}
+
+.dataset-facts li {
+  padding-left: 5px;
+}
+
+.dataset-facts li::marker {
+  color: var(--blue);
+}
+
+.dataset-subsection strong,
+.resource-subsection strong {
   color: var(--text);
   font-weight: 650;
 }
@@ -1093,8 +1105,7 @@ svg {
   margin-bottom: 34px;
 }
 
-.category-card__icon,
-.resource-row__icon {
+.category-card__icon {
   display: grid;
   place-items: center;
   border-radius: 14px;
@@ -1112,8 +1123,7 @@ svg {
 }
 
 .category-card__top > span,
-.metric__index,
-.resource-row__index {
+.metric__index {
   color: var(--text-muted);
   font-size: 0.7rem;
   font-weight: 650;
@@ -1235,70 +1245,47 @@ svg {
   line-height: 1.45;
 }
 
-.status-pill,
-.coming-soon {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
+.resource-sections {
+  max-width: 1040px;
 }
 
-.resources .status-pill {
-  min-height: 34px;
-  margin: -30px 0 39px;
-  padding: 0 13px;
-  border: 1px solid rgba(0, 143, 122, 0.18);
-  background: rgba(0, 143, 122, 0.07);
-  color: #006c5e;
+.resource-subsection + .resource-subsection {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 
-.status-pill > span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--teal);
+.resource-subsection h3 {
+  margin-bottom: 14px;
+  color: var(--text);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 650;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
 }
 
-.resources-list {
+.resource-subsection p {
+  max-width: 980px;
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+  font-size: 1.03rem;
+  line-height: 1.68;
+}
+
+.resource-pending-list {
   display: grid;
-  gap: 14px;
+  gap: 5px;
 }
 
-.resource-row {
-  min-height: 142px;
-  display: grid;
-  grid-template-columns: 42px 54px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 21px;
-  padding: 27px 30px;
-  border-radius: 22px;
+.resource-subsection .resource-pending {
+  margin-bottom: 0;
+  color: var(--blue-dark);
+  font-size: 0.94rem;
+  font-weight: 600;
 }
 
-.resource-row__icon {
-  width: 50px;
-  height: 50px;
-}
-
-.resource-row__icon svg {
-  width: 21px;
-}
-
-.resource-row h3 {
-  margin-bottom: 7px;
-  font-size: 1.2rem;
-}
-
-.resource-row h3.resource-row__title--nowrap {
-  white-space: nowrap;
-}
-
-.coming-soon {
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.65);
-  color: var(--text-muted);
-  white-space: nowrap;
+.resource-subsection .resource-pending strong {
+  color: inherit;
 }
 
 .timeline-list {
@@ -1312,17 +1299,17 @@ svg {
 }
 
 .timeline-row {
-  min-height: 88px;
+  min-height: 72px;
   display: grid;
   grid-template-columns: 65px minmax(0, 1fr) minmax(150px, auto);
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .timeline-row__index {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(0, 113, 227, 0.24);
@@ -1338,12 +1325,12 @@ svg {
 }
 
 .timeline-date {
-  min-height: 36px;
+  min-height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   justify-self: end;
-  padding: 7px 13px;
+  padding: 5px 11px;
   border: 1px solid transparent;
   border-radius: 999px;
   font-size: 0.8rem;
@@ -1364,19 +1351,6 @@ svg {
   border-color: rgba(154, 106, 0, 0.2);
   background: rgba(154, 106, 0, 0.08);
   color: var(--gold);
-}
-
-.license-card {
-  padding: 40px;
-  border: 1px solid var(--border);
-  border-radius: 26px;
-}
-
-.license-card > svg {
-  width: 34px;
-  height: 34px;
-  margin-bottom: 26px;
-  color: var(--blue);
 }
 
 .organizer-card {
@@ -1722,7 +1696,8 @@ svg {
 
   .overview-narrative p,
   .dataset-subsection p,
-  .license-card p {
+  .dataset-facts,
+  .resource-subsection p {
     font-size: 1rem;
     line-height: 1.7;
   }
@@ -1742,6 +1717,15 @@ svg {
 
   .dataset-subsection h3 {
     font-size: 1.45rem;
+  }
+
+  .resource-subsection + .resource-subsection {
+    margin-top: 26px;
+    padding-top: 26px;
+  }
+
+  .resource-subsection h3 {
+    font-size: 1.4rem;
   }
 
   .taxonomy-block {
@@ -1818,34 +1802,10 @@ svg {
     margin-top: 8px;
   }
 
-  .resource-row {
-    grid-template-columns: 35px 49px minmax(0, 1fr);
-    gap: 13px;
-    padding: 24px 19px;
-  }
-
-  .resource-row__content {
-    grid-column: 3;
-  }
-
-  .resource-row h3.resource-row__title--nowrap {
-    font-size: clamp(0.96rem, 4.5vw, 1.2rem);
-    letter-spacing: -0.035em;
-  }
-
-  .coming-soon--static {
-    grid-column: 3;
-    justify-self: start;
-  }
-
-  .resources .status-pill {
-    margin-top: -15px;
-  }
-
   .timeline-row {
-    grid-template-columns: 53px minmax(0, 1fr);
-    gap: 8px 12px;
-    padding: 12px 0;
+    grid-template-columns: 49px minmax(0, 1fr);
+    gap: 4px 10px;
+    padding: 8px 0;
   }
 
   .timeline-date {
@@ -1854,7 +1814,6 @@ svg {
     text-align: left;
   }
 
-  .license-card,
   .organizer-card {
     padding: 27px 22px;
     border-radius: 22px;
