@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   AudioLines,
+  Github,
   Mail,
   Menu,
   Network,
@@ -31,19 +32,6 @@ const timelineItems = [
   { date: "Jan. 21, 2027", dateTime: "2027-01-21", event: "Two-page paper acceptance notification" },
   { date: "Jan. 28, 2027", dateTime: "2027-01-28", event: "Camera-ready two-page papers due" },
   { date: "May 16–21, 2027", dateTime: "2027-05-16", event: "RMSAU challenge session at ICASSP 2027, Toronto, Canada" },
-] as const;
-
-const committeeMembers = [
-  { name: "Qing Wang", affiliation: "University of Science and Technology of China, China" },
-  { name: "Lichun Fan", affiliation: "Xiaomi Corporation, China" },
-  { name: "Yufeng Hao", affiliation: "DataoceanAI, China" },
-  { name: "Zhifeng Kong", affiliation: "NVIDIA, USA" },
-  { name: "Mengyao Zhu", affiliation: "Soochow University, China" },
-  { name: "Peihao Chen", affiliation: "University of Science and Technology of China, China" },
-  { name: "Hengyi Hong", affiliation: "University of Science and Technology of China, China" },
-  { name: "Hang Su", affiliation: "Xiaomi Corporation, China" },
-  { name: "Yujie Jian", affiliation: "DataoceanAI, China" },
-  { name: "Jun Du", affiliation: "University of Science and Technology of China, China" },
 ] as const;
 
 type TaskVisual = "counting" | "detection" | "temporal" | "location" | "spatial" | "action";
@@ -486,7 +474,7 @@ export default function App() {
               <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Grand Challenge</div>
               <h1 ref={heroTitleRef}>
                 <span className="hero__title-text">
-                  <span className="hero__title-primary">Real-world Multi‑channel</span>{" "}
+                  <span className="hero__title-primary">Real-world Multi-channel</span>{" "}
                   <span className="hero__title-accent">Spatial Audio Understanding</span>
                 </span>
               </h1>
@@ -534,7 +522,7 @@ export default function App() {
                 of sound, space, time, and context.
               </p>
               <p>
-                RMSAU addresses this gap through a unified challenge for real-world multichannel
+                RMSAU addresses this gap through a unified challenge for real-world multi-channel
                 spatial audio understanding. By connecting semantic perception with temporal and
                 spatial reasoning and context-aware action, the challenge provides common ground
                 for measuring progress toward reliable and responsible smart-home agents. We
@@ -550,7 +538,7 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                RMSAU is a unified two‑layer challenge for real‑world multi‑channel spatial audio
+                RMSAU is a unified two‑layer challenge for real‑world multi-channel spatial audio
                 understanding, built around 10‑second First‑Order Ambisonics recordings from
                 smart‑home environments. In Layer 1, models identify the sound events present in
                 a scene. The generated semantic response then becomes part of the Layer 2 context,
@@ -562,7 +550,7 @@ export default function App() {
                 situated intelligence: understanding what is happening in a home, when and where
                 it occurs, how events relate to one another, and what the situation requires next.
                 Its goal is to advance models that combine reliable semantic perception with
-                multichannel spatial and temporal reasoning under one consistent benchmark.
+                multi-channel spatial and temporal reasoning under one consistent benchmark.
               </p>
               <p>
                 By connecting perception, reasoning, and risk‑aware decision making, RMSAU provides
@@ -729,6 +717,12 @@ export default function App() {
                   prohibited. Any signal processing, spatial audio, machine learning, or LALM
                   method may be used, provided predictions follow the official submission format.
                 </p>
+                <p className="resource-contact">
+                  For participation inquiries, contact the organizing committee at
+                  {" "}<a href="mailto:rmsau.challenge@gmail.com">
+                    <Mail size={16} aria-hidden="true" /> rmsau.challenge@gmail.com
+                  </a>.
+                </p>
               </section>
             </div>
           </div>
@@ -757,22 +751,18 @@ export default function App() {
           <div className="container">
             <SectionHeading
               index="06 / Organizers"
-              title="Organizers"
-              description="The RMSAU challenge is organized by researchers and practitioners from academia and industry."
+              title="Organizing Committee"
+              description="Committee membership and affiliations will be published as challenge preparations progress."
             />
-            <div className="committee-block">
-              <ul className="committee-list" role="list" aria-label="Organizing committee members">
-                {committeeMembers.map(({ name, affiliation }) => (
-                  <li className="committee-member" key={name}>
-                    <strong>{name}</strong><span>, {affiliation}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="committee-contact">
-                <span className="mini-label">Organizers contact</span>
-                <a href="mailto:rmsau.challenge@gmail.com">
-                  <Mail size={17} aria-hidden="true" /> rmsau.challenge@gmail.com
-                </a>
+            <div className="organizer-card organizer-card--stacked">
+              <div className="organizer-card__mark"><RmsauMark /></div>
+              <div>
+                <span className="mini-label">Details forthcoming</span>
+                <h3>Organizer details will be announced.</h3>
+                <p>Confirmed committee members and affiliations will appear here.</p>
+              </div>
+              <div className="organizer-card__links" aria-label="Upcoming organizer links">
+                <span><Github size={16} aria-hidden="true" /> Repository coming soon</span>
               </div>
             </div>
           </div>
