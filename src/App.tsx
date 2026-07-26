@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
-  ArrowRight,
   AudioLines,
   Mail,
   Menu,
@@ -464,16 +463,6 @@ export default function App() {
               </a>
             );
           })}
-          <a
-            className="nav-cta"
-            href="#resources"
-            onClick={() => {
-              setActiveSection("resources");
-              setMenuOpen(false);
-            }}
-          >
-            Updates soon <ArrowRight size={15} />
-          </a>
         </nav>
 
         <button
@@ -600,11 +589,13 @@ export default function App() {
                 <p className="dataset-subsection__intro">The training and validation data consist of:</p>
                 <ul className="dataset-facts">
                   <li>
-                    <strong>Audio clips:</strong> 170K training clips and 5K validation clips,
-                    comprising 3K simulated clips and 2K real-recorded clips.
+                    <strong>Audio clips:</strong> <strong>170K</strong> training clips, all simulated,
+                    and <strong>5K</strong> validation clips, comprising <strong>3K</strong> simulated
+                    clips and <strong>2K</strong> real-recorded clips.
                   </li>
                   <li>
-                    <strong>Two-layer QA pairs:</strong> 170K training pairs and 5K validation pairs.
+                    <strong>Two-layer QA pairs:</strong> <strong>170K</strong> training pairs and
+                    {" "}<strong>5K</strong> validation pairs.
                   </li>
                 </ul>
                 <p className="dataset-note">
@@ -631,8 +622,8 @@ export default function App() {
                 <h3 id="test-data-title">Test data</h3>
                 <p className="dataset-subsection__intro">The test data consist of:</p>
                 <ul className="dataset-facts">
-                  <li><strong>Audio clips:</strong> 2K real-recorded clips.</li>
-                  <li><strong>Two-layer QA pairs:</strong> 2K pairs.</li>
+                  <li><strong>Audio clips:</strong> <strong>2K</strong> real-recorded clips.</li>
+                  <li><strong>Two-layer QA pairs:</strong> <strong>2K</strong> pairs.</li>
                 </ul>
                 <p className="dataset-note">
                   The recording equipment, data format, sampling rate, and QA-generation process
