@@ -1338,14 +1338,10 @@ svg {
 
 .committee-member {
   margin: 0;
-  padding: 10px 0;
+  padding: 3px 0;
   color: #38383b;
   font-size: 1.03rem;
   line-height: 1.6;
-}
-
-.committee-member + .committee-member {
-  border-top: 1px solid var(--border);
 }
 
 .committee-member strong {
