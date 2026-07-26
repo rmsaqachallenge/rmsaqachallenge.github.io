@@ -352,6 +352,7 @@ export default function App() {
 
       if (!desktopLayout.matches) {
         document.documentElement.style.removeProperty("--display-title-size");
+        document.documentElement.style.removeProperty("--section-title-size");
         return;
       }
 
@@ -366,6 +367,7 @@ export default function App() {
       const fittedSize = currentFontSize * (targetWidth / currentTextWidth);
       const safeSize = Math.min(54, Math.max(32, fittedSize));
       document.documentElement.style.setProperty("--display-title-size", `${safeSize.toFixed(3)}px`);
+      document.documentElement.style.setProperty("--section-title-size", `${(safeSize * 0.88).toFixed(3)}px`);
     };
 
     const scheduleTitleFit = () => {
@@ -382,6 +384,7 @@ export default function App() {
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("resize", scheduleTitleFit);
       document.documentElement.style.removeProperty("--display-title-size");
+      document.documentElement.style.removeProperty("--section-title-size");
     };
   }, []);
 

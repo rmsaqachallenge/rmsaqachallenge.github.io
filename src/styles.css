@@ -23,6 +23,7 @@
   --container: 1180px;
   --section-content: 1180px;
   --display-title-size: clamp(2rem, 3.02vw, 2.72rem);
+  --section-title-size: clamp(1.78rem, 2.68vw, 2.4rem);
   --section-block-space: 64px;
 }
 
@@ -597,11 +598,11 @@ svg {
 }
 
 .participation h2 {
-  margin-bottom: 32px;
-  padding-bottom: 32px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--border-strong);
   color: var(--text);
-  font-size: var(--display-title-size);
+  font-size: var(--section-title-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.055em;
@@ -629,8 +630,8 @@ svg {
 
 .section-heading {
   max-width: var(--section-content);
-  margin-bottom: 32px;
-  padding-bottom: 32px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--border-strong);
 }
 
@@ -638,7 +639,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 11px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: var(--blue-dark);
 }
 
@@ -649,9 +650,9 @@ svg {
 }
 
 .section-heading h2 {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: var(--text);
-  font-size: var(--display-title-size);
+  font-size: var(--section-title-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.055em;
@@ -1276,14 +1277,14 @@ svg {
   display: grid;
   gap: 16px;
   margin: 0;
-  padding: 20px 0 0;
+  padding: 14px 0 0;
   border-top: 1px solid var(--border-strong);
   list-style: none;
 }
 
 .timeline .section-heading {
   margin-bottom: 0;
-  padding-bottom: 20px;
+  padding-bottom: 14px;
   border-bottom: 0;
 }
 
@@ -1465,6 +1466,7 @@ svg {
 @media (max-width: 900px) {
   :root {
     --display-title-size: clamp(2.55rem, 7vw, 3.75rem);
+    --section-title-size: clamp(2.25rem, 6.2vw, 3.3rem);
     --section-block-space: 56px;
   }
 
@@ -1539,6 +1541,7 @@ svg {
   :root {
     --header-height: 64px;
     --display-title-size: clamp(2.7rem, 12vw, 3.6rem);
+    --section-title-size: clamp(2.35rem, 10.6vw, 3.15rem);
     --section-block-space: 40px;
   }
 
@@ -1547,8 +1550,8 @@ svg {
   }
 
   .participation h2 {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
     line-height: 1.03;
   }
 
@@ -1630,11 +1633,16 @@ svg {
   }
 
   .section-heading {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
   }
 
   .section-heading h2 {
+    margin-bottom: 10px;
     line-height: 1.03;
   }
 
@@ -1682,12 +1690,12 @@ svg {
   }
 
   .timeline .section-heading {
-    padding-bottom: 16px;
+    padding-bottom: 12px;
   }
 
   .timeline-list {
     gap: 14px;
-    padding-top: 16px;
+    padding-top: 12px;
   }
 
   .timeline-row {
