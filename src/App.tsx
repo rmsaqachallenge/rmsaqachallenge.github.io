@@ -114,7 +114,7 @@ const categories: Array<{
   },
 ];
 
-const conditionalLayer2Formula = String.raw`\boldsymbol{A_{\mathrm{CL2}}=\frac{\sum_{i=1}^{N}\mathbb{1}\!\left(\hat{y}^{(1)}_i=y^{(1)}_i\ \land\ \hat{y}^{(2)}_i=y^{(2)}_i\right)}{N}}`;
+const conditionalLayer2Formula = String.raw`\mathrm{Score}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left(\hat{y}^{(1)}_i=y^{(1)}_i,\ \hat{y}^{(2)}_i=y^{(2)}_i\right)`;
 
 function RmsauMark() {
   return (
@@ -687,11 +687,6 @@ export default function App() {
               </div>
               <div className="metric__formula" aria-label="Conditional Layer-2 accuracy formula">
                 <BlockMath math={conditionalLayer2Formula} />
-              </div>
-              <div className="score-components" aria-label="Evaluation metric definitions">
-                <div><strong>A<sub>CL2</sub></strong><span>Primary metric: Layer-1 and Layer-2 answers are both correct.</span></div>
-                <div><strong>A<sub>L1</sub></strong><span>Reference only: Layer-1 accuracy.</span></div>
-                <div><strong>A<sub>L2</sub></strong><span>Reference only: unconditional Layer-2 accuracy.</span></div>
               </div>
             </article>
           </div>

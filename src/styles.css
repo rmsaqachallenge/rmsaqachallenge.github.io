@@ -1220,34 +1220,6 @@ svg {
   font-weight: 700;
 }
 
-.score-components {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.score-components > div {
-  display: grid;
-  gap: 5px;
-  padding: 16px 18px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(0, 113, 227, 0.035);
-}
-
-.score-components strong {
-  color: var(--blue-dark);
-  font-size: 1.02rem;
-  font-weight: 700;
-}
-
-.score-components span {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  line-height: 1.45;
-}
-
 .resource-sections {
   max-width: var(--section-content);
 }
@@ -1782,11 +1754,6 @@ svg {
     margin-top: 20px;
     padding: 16px 8px;
     font-size: 0.82rem;
-  }
-
-  .score-components {
-    grid-template-columns: 1fr;
-    margin-top: 8px;
   }
 
   .committee-member {
