@@ -595,7 +595,8 @@ export default function App() {
                   </li>
                   <li>
                     <strong>Two-layer QA pairs:</strong> <strong>170K</strong> training pairs and
-                    {" "}<strong>5K</strong> validation pairs.
+                    {" "}<strong>6K</strong> validation pairs, comprising <strong>3K</strong> paired
+                    with simulated clips and <strong>3K</strong> paired with real-recorded clips.
                   </li>
                 </ul>
                 <p className="dataset-note">
@@ -623,7 +624,7 @@ export default function App() {
                 <p className="dataset-subsection__intro">The test data consist of:</p>
                 <ul className="dataset-facts">
                   <li><strong>Audio clips:</strong> <strong>2K</strong> real-recorded clips.</li>
-                  <li><strong>Two-layer QA pairs:</strong> <strong>2K</strong> pairs.</li>
+                  <li><strong>Two-layer QA pairs:</strong> <strong>3K</strong> pairs.</li>
                 </ul>
                 <p className="dataset-note">
                   The recording equipment, data format, sampling rate, and QA-generation process
