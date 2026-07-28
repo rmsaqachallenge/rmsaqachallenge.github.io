@@ -1,6 +1,6 @@
-# RMSAU — ICASSP 2027 Grand Challenge
+# RMSAQA — ICASSP 2027 Grand Challenge
 
-Website for **RMSAU: Real-world Multi-channel Spatial Audio Understanding**, an ICASSP 2027 Grand Challenge for hierarchical spatial audio reasoning in smart homes.
+Website for **RMSAQA: Real-world Multi-hop Spatial Audio Question Answering Challenge**, an ICASSP 2027 Grand Challenge for grounded spatial audio reasoning in smart homes.
 
 ## Local development
 

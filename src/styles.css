@@ -82,6 +82,10 @@ svg {
   display: block;
 }
 
+.no-break {
+  white-space: nowrap;
+}
+
 :focus-visible {
   outline: 3px solid rgba(0, 113, 227, 0.55);
   outline-offset: 3px;
@@ -374,13 +378,14 @@ svg {
 }
 
 .hero h1 {
+  max-width: 1180px;
   margin-bottom: 0;
   color: var(--text);
   font-size: var(--display-title-size);
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.052em;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero__title-text {
@@ -389,10 +394,11 @@ svg {
 
 .hero__title-primary,
 .hero__title-accent {
-  display: inline;
+  display: block;
 }
 
 .hero__title-accent {
+  margin-top: 0.08em;
   color: var(--blue);
 }
 

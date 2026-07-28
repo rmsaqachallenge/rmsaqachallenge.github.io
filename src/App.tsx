@@ -31,7 +31,7 @@ const timelineItems = [
   { date: "Jan. 7, 2027", dateTime: "2027-01-07", event: "Two-page papers due (by invitation)" },
   { date: "Jan. 21, 2027", dateTime: "2027-01-21", event: "Two-page paper acceptance notification" },
   { date: "Jan. 28, 2027", dateTime: "2027-01-28", event: "Camera-ready two-page papers due" },
-  { date: "May 16–21, 2027", dateTime: "2027-05-16", event: "RMSAU challenge session at ICASSP 2027, Toronto, Canada" },
+  { date: "May 16–21, 2027", dateTime: "2027-05-16", event: "RMSAQA challenge session at ICASSP 2027, Toronto, Canada" },
 ] as const;
 
 type TaskVisual = "counting" | "detection" | "temporal" | "location" | "spatial" | "action";
@@ -101,9 +101,9 @@ const categories: Array<{
   },
 ];
 
-const conditionalLayer2Formula = String.raw`\mathrm{Score}=\frac{1}{N}\sum_{i=1}^{N}\mathbb{1}\!\left(\hat{y}^{(1)}_i=y^{(1)}_i,\ \hat{y}^{(2)}_i=y^{(2)}_i\right)`;
+const groundedStage2Formula = String.raw`A_{\text{GS2}} = \frac{1}{N} \sum_{i=1}^{N} \mathbf{1}\left[\hat{y}_{\text{S1}}^{(i)} = y_{\text{S1}}^{(i)} \land \hat{y}_{\text{S2}}^{(i)} = y_{\text{S2}}^{(i)}\right]`;
 
-function RmsauMark() {
+function RmsaqaMark() {
   return (
     <span className="brand-mark" aria-hidden="true">
       <span className="brand-ring brand-ring--outer" />
@@ -425,10 +425,10 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to main content</a>
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="RMSAU home" onClick={() => setMenuOpen(false)}>
-          <RmsauMark />
+        <a className="brand" href="#top" aria-label="RMSAQA home" onClick={() => setMenuOpen(false)}>
+          <RmsaqaMark />
           <span className="brand-copy">
-            <strong>RMSAU</strong>
+            <strong>RMSAQA</strong>
             <span>ICASSP 2027 Grand Challenge</span>
           </span>
         </a>
@@ -474,8 +474,10 @@ export default function App() {
               <div className="conference-pill"><Sparkles size={15} /> ICASSP 2027 Grand Challenge</div>
               <h1 ref={heroTitleRef}>
                 <span className="hero__title-text">
-                  <span className="hero__title-primary">Real-world Multi-channel</span>{" "}
-                  <span className="hero__title-accent">Spatial Audio Understanding</span>
+                  <span className="hero__title-primary">
+                    Real-world <span className="no-break">Multi-hop</span> Spatial Audio
+                  </span>
+                  <span className="hero__title-accent">Question Answering Challenge</span>
                 </span>
               </h1>
             </div>
@@ -495,7 +497,7 @@ export default function App() {
               </div>
               <div className="hero__meta" aria-label="Challenge highlights">
                 <div><strong>10 sec</strong><span>FOA recordings</span></div>
-                <div><strong>2 layers</strong><span>Unified reasoning</span></div>
+                <div><strong>2 stages</strong><span>Grounded reasoning</span></div>
                 <div><strong>6 categories</strong><span>Understanding tasks</span></div>
               </div>
             </div>
@@ -504,7 +506,7 @@ export default function App() {
             </div>
           </div>
           <a className="scroll-cue" href="#participation" aria-label="Scroll to call for participation">
-            <span>Discover RMSAU</span><ArrowDown size={16} />
+            <span>Discover RMSAQA</span><ArrowDown size={16} />
           </a>
         </section>
 
@@ -522,8 +524,8 @@ export default function App() {
                 of sound, space, time, and context.
               </p>
               <p>
-                RMSAU addresses this gap through a unified challenge for real-world multi-channel
-                spatial audio understanding. By connecting semantic perception with temporal and
+                RMSAQA addresses this gap through a unified challenge for real-world multi-hop
+                spatial audio question answering. By connecting semantic perception with temporal and
                 spatial reasoning and context-aware action, the challenge provides common ground
                 for measuring progress toward reliable and responsible smart-home agents. We
                 invite you to participate, share new ideas, and help advance intelligent systems
@@ -538,10 +540,10 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                RMSAU is a unified two‑layer challenge for real‑world multi-channel spatial audio
-                understanding, built around 10‑second First‑Order Ambisonics recordings from
-                smart‑home environments. In Layer 1, models identify the sound events present in
-                a scene. The generated semantic response then becomes part of the Layer 2 context,
+                RMSAQA is a unified two-stage challenge for real-world multi-hop spatial audio
+                question answering, built around 10-second First-Order Ambisonics recordings from
+                smart-home environments. In Stage-1, models identify the sound events present in
+                a scene. The generated semantic response then becomes part of the Stage-2 context,
                 where models reason about quantities, timing, spatial location, temporal and
                 spatial relations, and appropriate actions.
               </p>
@@ -553,10 +555,10 @@ export default function App() {
                 multi-channel spatial and temporal reasoning under one consistent benchmark.
               </p>
               <p>
-                By connecting perception, reasoning, and risk‑aware decision making, RMSAU provides
+                By connecting perception, reasoning, and risk‑aware decision making, RMSAQA provides
                 a shared testbed for research at the intersection of spatial audio, embodied AI,
                 and intelligent environments. The benchmark is designed to expose both higher‑level
-                reasoning capability and the propagation of errors across its two connected layers,
+                reasoning capability and the propagation of errors across its two connected stages,
                 supporting progress toward safer and more context‑aware smart‑home systems.
               </p>
             </div>
@@ -568,7 +570,7 @@ export default function App() {
             <SectionHeading
               index="02 / Dataset"
               title="Dataset"
-              description="A unified collection of simulated and real-recorded FOA audio, paired with two-layer questions that connect scene perception to embodied reasoning."
+              description="A unified collection of simulated and real-recorded FOA audio, paired with two-stage questions that connect scene perception to embodied reasoning."
             />
 
             <div className="dataset-details">
@@ -582,7 +584,7 @@ export default function App() {
                     clips and <strong>2K</strong> real-recorded clips.
                   </li>
                   <li>
-                    <strong>Two-layer QA pairs:</strong> <strong>170K</strong> training pairs and
+                    <strong>Two-stage QA pairs:</strong> <strong>170K</strong> training pairs and
                     {" "}<strong>6K</strong> validation pairs, comprising <strong>3K</strong> paired
                     with simulated clips and <strong>3K</strong> paired with real-recorded clips.
                   </li>
@@ -612,7 +614,7 @@ export default function App() {
                 <p className="dataset-subsection__intro">The test data consist of:</p>
                 <ul className="dataset-facts">
                   <li><strong>Audio clips:</strong> <strong>2K</strong> real-recorded clips.</li>
-                  <li><strong>Two-layer QA pairs:</strong> <strong>3K</strong> pairs.</li>
+                  <li><strong>Two-stage QA pairs:</strong> <strong>3K</strong> pairs.</li>
                 </ul>
                 <p className="dataset-note">
                   The recording equipment, data format, sampling rate, and QA-generation process
@@ -625,7 +627,7 @@ export default function App() {
 
             <div className="taxonomy-block">
               <div className="categories-header categories-header--stacked">
-                <span className="mini-label">Layer 2 taxonomy</span>
+                <span className="mini-label">Stage-2 taxonomy</span>
                 <h3>Six dimensions of embodied audio reasoning</h3>
                 <p>Six question types connect temporal and spatial understanding with safe, context-aware action in smart homes.</p>
               </div>
@@ -656,20 +658,20 @@ export default function App() {
             <SectionHeading
               index="03 / Evaluation"
               title="Evaluation"
-              description="The primary evaluation metric will be conditional Layer-2 accuracy; Layer-1 accuracy and unconditional Layer-2 accuracy will also be reported for reference."
+              description="The official ranking will be based on A_GS2. We will also report Stage-1 accuracy, unconditional Stage-2 accuracy, and per-category accuracy for the six question categories."
             />
             <article className="metric metric--score">
               <div className="metric__content">
-                <div className="metric__title"><h3>Conditional Layer-2 Accuracy</h3><span>Primary metric</span></div>
+                <div className="metric__title"><h3>Grounded Stage-2 Accuracy</h3><span>Official ranking metric</span></div>
                 <p>
-                  A sample is counted as correct only when both its Layer-1 answer and Layer-2
-                  answer are correct. Conditional Layer-2 accuracy is the proportion of these
-                  jointly correct samples across all <em>N</em> evaluation samples and is the sole
-                  metric used for the final ranking.
+                  A sample is counted as correct only when both its Stage-1 answer and Stage-2
+                  answer are correct. Grounded Stage-2 accuracy, <em>A</em><sub>GS2</sub>, is the
+                  proportion of these jointly correct samples across all <em>N</em> evaluation
+                  samples and is the sole metric used for the official ranking.
                 </p>
               </div>
-              <div className="metric__formula" aria-label="Conditional Layer-2 accuracy formula">
-                <BlockMath math={conditionalLayer2Formula} />
+              <div className="metric__formula" aria-label="Grounded Stage-2 accuracy formula">
+                <BlockMath math={groundedStage2Formula} />
               </div>
             </article>
           </div>
@@ -701,10 +703,12 @@ export default function App() {
               <section className="resource-subsection" aria-labelledby="submission-title">
                 <h3 id="submission-title">Submission</h3>
                 <p>
-                  Submissions must include answer files for the official evaluation set, a brief
-                  system description, and a declaration of all external data and pretrained
-                  models. The organizing committee will verify compliance from the submitted
-                  report and may request reproduction materials when needed.
+                  Participants submit two predictions for every evaluation sample: one for the
+                  Stage-1 event-grounding question and one for the Stage-2 reasoning question.
+                  Submissions must also include answer files for the official evaluation set, a
+                  brief system description, and a declaration of all external data and pretrained
+                  models. The organizing committee will verify compliance from the submitted report
+                  and may request reproduction materials when needed.
                 </p>
               </section>
 
@@ -755,7 +759,7 @@ export default function App() {
               description="Committee membership and affiliations will be published as challenge preparations progress."
             />
             <div className="organizer-card organizer-card--stacked">
-              <div className="organizer-card__mark"><RmsauMark /></div>
+              <div className="organizer-card__mark"><RmsaqaMark /></div>
               <div>
                 <span className="mini-label">Details forthcoming</span>
                 <h3>Organizer details will be announced.</h3>
@@ -772,8 +776,8 @@ export default function App() {
       <footer className="site-footer">
         <div className="container site-footer__inner">
           <div className="footer-brand">
-            <RmsauMark />
-            <div><strong>RMSAU</strong><span>Real-world Multi-channel Spatial Audio Understanding</span></div>
+            <RmsaqaMark />
+            <div><strong>RMSAQA</strong><span>Real-world Multi-hop Spatial Audio Question Answering Challenge</span></div>
           </div>
           <p>ICASSP 2027 Grand Challenge · Preliminary website · Details subject to update</p>
           <a href="#top">Back to top <ArrowDown className="back-top-arrow" size={15} /></a>
