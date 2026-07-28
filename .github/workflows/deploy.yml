@@ -1,4 +1,4 @@
-name: Deploy RMSAU website to GitHub Pages
+name: Deploy RMSAQA website to GitHub Pages
 
 on:
   push:
