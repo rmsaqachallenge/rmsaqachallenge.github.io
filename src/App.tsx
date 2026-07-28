@@ -515,18 +515,19 @@ export default function App() {
             <h2 id="participation-title">Call for Participation</h2>
             <div className="participation__copy">
               <p>
-                Despite rapid progress in audio understanding, most systems still focus on
-                isolated recognition tasks that identify what sounds are present but provide
-                limited insight into when and where events occur, how they interact, or what
-                action should follow. This limitation is especially significant in smart homes,
-                where acoustic scenes are dynamic, spatially distributed, and sometimes
-                safety-critical. Embodied intelligence therefore requires a unified understanding
-                of sound, space, time, and context.
+                The Real-world Multi-hop Spatial Audio Question Answering (RMSAQA) challenge is
+                proposed as a continuation of DCASE 2025 Task 5 on Audio Question Answering. Recent
+                Large Audio–Language Models (LALMs) can recognize diverse acoustic events and answer
+                natural-language questions, yet most benchmarks remain monaural and focus mainly on
+                what happened. Practical home assistants and household robots must also reason about
+                where sounds originate, how sources relate across space and time, and which actions
+                are appropriate under safety constraints. RMSAQA addresses this gap by extending
+                event-level audio understanding to multi-hop spatial reasoning over realistic
+                multi-channel recordings.
               </p>
               <p>
-                RMSAQA addresses this gap through a unified challenge for real-world multi-hop
-                spatial audio question answering. By connecting semantic perception with temporal and
-                spatial reasoning and context-aware action, the challenge provides common ground
+                By connecting semantic perception with temporal and spatial reasoning and
+                context-aware action, RMSAQA provides common ground
                 for measuring progress toward reliable and responsible smart-home agents. We
                 invite you to participate, share new ideas, and help advance intelligent systems
                 that can listen, reason, and act in the physical world.
@@ -540,11 +541,9 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                The Real-world Multi-hop Spatial Audio Question Answering (RMSAQA) Challenge
-                continues the line of research established by DCASE 2025 Task 5 on Audio Question
-                Answering. It extends that task into a unified two-stage benchmark built around
-                10-second First-Order Ambisonics recordings from smart-home environments. In Stage 1,
-                models identify the sound events present in
+                RMSAQA is a unified two-stage challenge for real-world multi-hop spatial audio
+                question answering, built around 10-second First-Order Ambisonics recordings from
+                smart-home environments. In Stage 1, models identify the sound events present in
                 a scene. The generated semantic response then becomes part of the Stage-2 context,
                 where models reason about quantities, timing, spatial location, temporal and
                 spatial relations, and appropriate actions.
