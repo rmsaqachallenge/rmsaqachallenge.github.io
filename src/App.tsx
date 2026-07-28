@@ -724,8 +724,8 @@ export default function App() {
                 </p>
                 <p className="resource-contact">
                   For participation inquiries, contact the organizing committee at
-                  {" "}<a href="mailto:rmsau.challenge@gmail.com">
-                    <Mail size={16} aria-hidden="true" /> rmsau.challenge@gmail.com
+                  {" "}<a href="mailto:rmsaqa.2027@gmail.com">
+                    <Mail size={16} aria-hidden="true" /> rmsaqa.2027@gmail.com
                   </a>.
                 </p>
               </section>
