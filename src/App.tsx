@@ -476,7 +476,7 @@ export default function App() {
                 <span className="hero__title-text">
                   <span className="hero__title-primary">
                     Real-world <span className="no-break">Multi-hop</span> Spatial Audio
-                  </span>
+                  </span>{" "}
                   <span className="hero__title-accent">Question Answering Challenge</span>
                 </span>
               </h1>
