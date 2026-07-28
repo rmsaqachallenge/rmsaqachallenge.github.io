@@ -540,9 +540,11 @@ export default function App() {
             <SectionHeading index="01 / Overview" title="Challenge Overview" />
             <div className="overview-narrative">
               <p>
-                RMSAQA is a unified two-stage challenge for real-world multi-hop spatial audio
-                question answering, built around 10-second First-Order Ambisonics recordings from
-                smart-home environments. In Stage-1, models identify the sound events present in
+                The Real-world Multi-hop Spatial Audio Question Answering (RMSAQA) Challenge
+                continues the line of research established by DCASE 2025 Task 5 on Audio Question
+                Answering. It extends that task into a unified two-stage benchmark built around
+                10-second First-Order Ambisonics recordings from smart-home environments. In Stage 1,
+                models identify the sound events present in
                 a scene. The generated semantic response then becomes part of the Stage-2 context,
                 where models reason about quantities, timing, spatial location, temporal and
                 spatial relations, and appropriate actions.
@@ -552,7 +554,7 @@ export default function App() {
                 situated intelligence: understanding what is happening in a home, when and where
                 it occurs, how events relate to one another, and what the situation requires next.
                 Its goal is to advance models that combine reliable semantic perception with
-                multi-channel spatial and temporal reasoning under one consistent benchmark.
+                multi-hop spatial and temporal reasoning under one consistent benchmark.
               </p>
               <p>
                 By connecting perception, reasoning, and risk‑aware decision making, RMSAQA provides

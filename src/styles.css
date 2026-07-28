@@ -347,10 +347,12 @@ svg {
 
 .hero__content {
   grid-area: content;
+  translate: 0 -24px;
 }
 
 .hero__visual {
   grid-area: visual;
+  min-height: 440px;
 }
 
 .conference-pill,
@@ -498,12 +500,13 @@ svg {
 
 .audio-field {
   position: relative;
-  width: min(100%, 440px);
+  width: min(100%, 390px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   background: transparent;
   filter: drop-shadow(0 30px 60px rgba(0, 54, 108, 0.12));
+  translate: 0 -18px;
 }
 
 .audio-field__svg {
@@ -591,8 +594,8 @@ svg {
 }
 
 .participation h2 {
-  margin-bottom: 24px;
-  padding-bottom: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border-strong);
   color: var(--text);
   font-size: var(--section-title-size);
@@ -604,7 +607,7 @@ svg {
 .participation__copy {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 28px;
+  gap: 20px;
 }
 
 .participation__copy p {
@@ -623,8 +626,8 @@ svg {
 
 .section-heading {
   max-width: var(--section-content);
-  margin-bottom: 24px;
-  padding-bottom: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border-strong);
 }
 
@@ -632,7 +635,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 11px;
-  margin-bottom: 16px;
+  margin-bottom: 11px;
   color: var(--blue-dark);
 }
 
@@ -643,7 +646,7 @@ svg {
 }
 
 .section-heading h2 {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: var(--text);
   font-size: var(--section-title-size);
   font-weight: 700;
@@ -800,22 +803,22 @@ svg {
 }
 
 .taxonomy-block {
-  padding-top: 40px;
+  padding-top: 28px;
   border-top: 1px solid var(--border-strong);
 }
 
 .categories-header--stacked {
-  margin-bottom: 37px;
+  margin-bottom: 28px;
 }
 
 .categories-header--stacked h3 {
   max-width: none;
-  margin: 14px 0 14px;
+  margin: 10px 0;
   color: var(--text);
-  font-size: clamp(1.85rem, 3vw, 2.65rem);
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
   font-weight: 650;
-  line-height: 1.12;
-  letter-spacing: -0.04em;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
 }
 
 .categories-header--stacked > p {
@@ -1495,6 +1498,10 @@ svg {
       "visual";
   }
 
+  .hero__content {
+    translate: none;
+  }
+
   .hero__title-block,
   .hero__content {
     text-align: center;
@@ -1523,11 +1530,13 @@ svg {
 
   .hero__visual {
     margin-top: 38px;
+    min-height: 0;
     justify-items: center;
   }
 
   .audio-field {
-    width: min(100%, 460px);
+    width: min(100%, 400px);
+    translate: none;
   }
 
   .scroll-cue {
@@ -1562,13 +1571,13 @@ svg {
   }
 
   .participation h2 {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
     line-height: 1.03;
   }
 
   .participation__copy {
-    gap: 24px;
+    gap: 18px;
   }
 
   .participation__copy p {
@@ -1645,16 +1654,16 @@ svg {
   }
 
   .section-heading {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
   }
 
   .eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   .section-heading h2 {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
     line-height: 1.03;
   }
 
@@ -1698,7 +1707,7 @@ svg {
   }
 
   .taxonomy-block {
-    padding-top: 32px;
+    padding-top: 24px;
   }
 
   .timeline .section-heading {
