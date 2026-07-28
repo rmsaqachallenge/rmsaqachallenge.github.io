@@ -22,7 +22,7 @@
   --header-height: 68px;
   --container: 1180px;
   --section-content: 1180px;
-  --display-title-size: clamp(2rem, 3.02vw, 2.72rem);
+  --display-title-size: clamp(1.25rem, 2.3vw, 1.9rem);
   --section-title-size: clamp(1.78rem, 2.68vw, 2.4rem);
   --section-block-space: 64px;
 }
@@ -385,7 +385,7 @@ svg {
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.052em;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .hero__title-text {
@@ -394,11 +394,10 @@ svg {
 
 .hero__title-primary,
 .hero__title-accent {
-  display: block;
+  display: inline;
 }
 
 .hero__title-accent {
-  margin-top: 0.08em;
   color: var(--blue);
 }
 
