@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   AudioLines,
-  Github,
   Mail,
   Menu,
   Network,
@@ -32,6 +31,19 @@ const timelineItems = [
   { date: "Jan. 21, 2027", dateTime: "2027-01-21", event: "Two-page paper acceptance notification" },
   { date: "Jan. 28, 2027", dateTime: "2027-01-28", event: "Camera-ready two-page papers due" },
   { date: "May 16–21, 2027", dateTime: "2027-05-16", event: "RMS-AQA challenge session at ICASSP 2027, Toronto, Canada" },
+] as const;
+
+const committeeMembers = [
+  { name: "Qing Wang", affiliation: "University of Science and Technology of China, China" },
+  { name: "Peihao Chen", affiliation: "University of Science and Technology of China, China" },
+  { name: "Hengyi Hong", affiliation: "University of Science and Technology of China, China" },
+  { name: "Jun Du", affiliation: "University of Science and Technology of China, China" },
+  { name: "Lichun Fan", affiliation: "Xiaomi Corporation, China" },
+  { name: "Hang Su", affiliation: "Xiaomi Corporation, China" },
+  { name: "Yufeng Hao", affiliation: "DataoceanAI, China" },
+  { name: "Yujie Jian", affiliation: "DataoceanAI, China" },
+  { name: "Zhifeng Kong", affiliation: "NVIDIA, USA" },
+  { name: "Mengyao Zhu", affiliation: "Soochow University, China" },
 ] as const;
 
 type TaskVisual = "counting" | "detection" | "temporal" | "location" | "spatial" | "action";
@@ -757,17 +769,21 @@ export default function App() {
             <SectionHeading
               index="06 / Organizers"
               title="Organizing Committee"
-              description="Committee membership and affiliations will be published as challenge preparations progress."
+              description="The RMS-AQA challenge is organized by researchers and practitioners from academia and industry."
             />
-            <div className="organizer-card organizer-card--stacked">
-              <div className="organizer-card__mark"><RmsaqaMark /></div>
-              <div>
-                <span className="mini-label">Details forthcoming</span>
-                <h3>Organizer details will be announced.</h3>
-                <p>Confirmed committee members and affiliations will appear here.</p>
-              </div>
-              <div className="organizer-card__links" aria-label="Upcoming organizer links">
-                <span><Github size={16} aria-hidden="true" /> Repository coming soon</span>
+            <div className="committee-block">
+              <ul className="committee-list" role="list" aria-label="Organizing committee members">
+                {committeeMembers.map(({ name, affiliation }) => (
+                  <li className="committee-member" key={name}>
+                    <strong>{name}</strong><span>, {affiliation}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="committee-contact">
+                <span className="mini-label">Organizers contact</span>
+                <a href="mailto:rmsaqa.2027@gmail.com">
+                  <Mail size={17} aria-hidden="true" /> rmsaqa.2027@gmail.com
+                </a>
               </div>
             </div>
           </div>
