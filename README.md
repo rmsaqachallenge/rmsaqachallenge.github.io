@@ -16,9 +16,9 @@ npm run build
 npm run preview
 ```
 
-The Vite `base` is set to `/rmsaqa/`, so the generated `dist/` directory is ready for the project's GitHub Pages URL:
+The Vite `base` is set to `/`, so the generated `dist/` directory is ready for the organization-level GitHub Pages URL:
 
-<https://sprat-lab.github.io/rmsaqa/>
+<https://rmsaqachallenge.github.io/>
 
 ## Updating pending information
 
