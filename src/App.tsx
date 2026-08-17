@@ -98,9 +98,9 @@ const categories: Array<{
   },
   {
     title: "Spatial Relation",
-    description: "Compare the relative position of one sound source with another sound source.",
-    question: "Relative to the sound of the television, from which direction does the sound of the air conditioner originate?",
-    answer: "The sound of the air conditioner originates to the right of and behind the sound of the television.",
+    description: "Compare the relative distance of one sound source with another sound source.",
+    question: "Between the furniture movement and the train wheel squeal, which sound is further from the listener?",
+    answer: "The farther source is the source for furniture movement, about 4.5 m from the listener.",
     visual: "spatial",
     group: "spatial",
     index: "05",
@@ -217,23 +217,23 @@ function TaskDiagram({ kind, title }: { kind: TaskVisual; title: string }) {
   if (kind === "spatial") {
     return (
       <svg {...commonProps}>
-        <title>Air-conditioner sound originating right of and behind the television sound</title>
-        <circle className="diagram-orbit" cx="160" cy="55" r="33" />
-        <line className="diagram-axis" x1="160" y1="14" x2="160" y2="105" />
-        <line className="diagram-axis" x1="112" y1="55" x2="208" y2="55" />
-        <path className="diagram-facing" d="M160 13 L156 20 H164 Z" />
-        <circle className="diagram-robot" cx="160" cy="55" r="19" />
-        <text className="diagram-robot-label" x="160" y="59" textAnchor="middle">Robot</text>
-        <rect className="diagram-source" x="90" y="78" width="30" height="18" rx="4" />
-        <rect className="diagram-highlight" x="226" y="88" width="34" height="18" rx="4" />
-        <path className="diagram-relation-arrow" d="M123 87 C155 72 200 76 226 97" />
-        <text className="diagram-label" x="78" y="114">TV sound</text>
-        <text className="diagram-accent-label" x="210" y="118">A/C sound</text>
-        <text className="diagram-tick-label" x="194" y="75">right + behind</text>
-        <text className="diagram-axis-label" x="148" y="10">Front</text>
-        <text className="diagram-axis-label" x="148" y="120">Rear</text>
-        <text className="diagram-axis-label" x="82" y="59">Left</text>
-        <text className="diagram-axis-label" x="218" y="59">Right</text>
+        <title>Furniture movement is farther from the listener than the train wheel squeal, at about 4.5 metres</title>
+        <line className="diagram-axis" x1="59" y1="63" x2="296" y2="63" />
+        <line className="diagram-source diagram-dash" x1="59" y1="39" x2="148" y2="39" />
+        <line className="diagram-highlight diagram-dash" x1="59" y1="15" x2="276" y2="15" />
+        <line className="diagram-tick" x1="148" y1="35" x2="148" y2="54" />
+        <line className="diagram-tick" x1="276" y1="11" x2="276" y2="54" />
+        <circle className="diagram-robot" cx="43" cy="63" r="17" />
+        <text className="diagram-robot-label" x="43" y="67" textAnchor="middle">L</text>
+        <rect className="diagram-source" x="137" y="54" width="22" height="18" rx="5" />
+        <rect className="diagram-highlight" x="264" y="52" width="24" height="22" rx="6" />
+        <text className="diagram-strong-label" x="103" y="34" textAnchor="middle">closer</text>
+        <text className="diagram-accent-label" x="168" y="11" textAnchor="middle">4.5 m · farther</text>
+        <text className="diagram-label" x="43" y="94" textAnchor="middle">Listener</text>
+        <text className="diagram-label" x="148" y="91" textAnchor="middle">Train wheel</text>
+        <text className="diagram-label" x="148" y="104" textAnchor="middle">squeal</text>
+        <text className="diagram-accent-label" x="276" y="91" textAnchor="middle">Furniture</text>
+        <text className="diagram-accent-label" x="276" y="104" textAnchor="middle">movement</text>
       </svg>
     );
   }
