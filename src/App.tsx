@@ -22,15 +22,16 @@ const navItems: NavItem[] = [
 ];
 
 const timelineItems = [
-  { date: "Aug. 24, 2026", dateTime: "2026-08-24", event: "Challenge website registration opens" },
-  { date: "Sep. 1, 2026", dateTime: "2026-09-01", event: "Training/development data and baselines release" },
-  { date: "Nov. 24, 2026", dateTime: "2026-11-24", event: "Evaluation set release" },
+  { date: "Aug. 24, 2026", dateTime: "2026-08-24", event: "Challenge website and registration open" },
+  { date: "Sep. 1, 2026", dateTime: "2026-09-01", event: "Training/development simulation data released" },
+  { date: "Sep. 18, 2026", dateTime: "2026-09-18", event: "Real development data and baselines released" },
+  { date: "Nov. 24, 2026", dateTime: "2026-11-24", event: "Real evaluation data released" },
   { date: "Dec. 10, 2026", dateTime: "2026-12-10", event: "Submission deadline" },
-  { date: "Dec. 24, 2026", dateTime: "2026-12-24", event: "Results release" },
+  { date: "Dec. 24, 2026", dateTime: "2026-12-24", event: "Results released" },
   { date: "Jan. 7, 2027", dateTime: "2027-01-07", event: "Two-page papers due (by invitation)" },
   { date: "Jan. 21, 2027", dateTime: "2027-01-21", event: "Two-page paper acceptance notification" },
   { date: "Jan. 28, 2027", dateTime: "2027-01-28", event: "Camera-ready two-page papers due" },
-  { date: "May 16–21, 2027", dateTime: "2027-05-16", event: "RMS-AQA challenge session at ICASSP 2027, Toronto, Canada" },
+  { date: "May 16-21, 2027", dateTime: "2027-05-16", event: "RMS-AQA challenge session at ICASSP 2027, Toronto, Canada" },
 ] as const;
 
 const committeeMembers = [
