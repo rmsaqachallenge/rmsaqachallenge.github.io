@@ -40,9 +40,12 @@ const committeeMembers = [
   { name: "Jun Du", affiliation: "University of Science and Technology of China, China" },
   { name: "Lichun Fan", affiliation: "Xiaomi Corporation, China" },
   { name: "Hang Su", affiliation: "Xiaomi Corporation, China" },
+  { name: "Jian Luan", affiliation: "Xiaomi Corporation, China" },
   { name: "Yufeng Hao", affiliation: "DataoceanAI, China" },
   { name: "Yujie Jian", affiliation: "DataoceanAI, China" },
+  { name: "Ke Li", affiliation: "DataoceanAI, China" },
   { name: "Zhifeng Kong", affiliation: "NVIDIA, USA" },
+  { name: "Chao-Han Huck Yang", affiliation: "work done in NVIDIA, USA" },
   { name: "Mengyao Zhu", affiliation: "Soochow University, China" },
 ] as const;
 
@@ -769,7 +772,7 @@ export default function App() {
             <SectionHeading
               index="06 / Organizers"
               title="Organizing Committee"
-              description="The RMS-AQA challenge is organized by researchers and practitioners from academia and industry."
+              description="The RMS-AQA challenge is organized by researchers from both academia and industry."
             />
             <div className="committee-block">
               <ul className="committee-list" role="list" aria-label="Organizing committee members">
