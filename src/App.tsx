@@ -48,6 +48,7 @@ const committeeMembers = [
   { name: "Zhifeng Kong", affiliation: "NVIDIA, USA" },
   { name: "Chao-Han Huck Yang", affiliation: "work done in NVIDIA, USA" },
   { name: "Mengyao Zhu", affiliation: "Soochow University, China" },
+  { name: "Shichao Hu", affiliation: "Soochow University, China" },
 ] as const;
 
 type TaskVisual = "counting" | "detection" | "temporal" | "location" | "spatial" | "action";
