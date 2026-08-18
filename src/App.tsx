@@ -22,9 +22,9 @@ const navItems: NavItem[] = [
 ];
 
 const timelineItems = [
-  { date: "Aug. 24, 2026", dateTime: "2026-08-24", event: "Challenge website and registration open" },
-  { date: "Sep. 1, 2026", dateTime: "2026-09-01", event: "Training/development simulation data released" },
-  { date: "Sep. 18, 2026", dateTime: "2026-09-18", event: "Real development data and baselines released" },
+  { date: "Sep. 1, 2026", dateTime: "2026-09-01", event: "Challenge website and registration open" },
+  { date: "Sep. 10, 2026", dateTime: "2026-09-10", event: "Training/development simulation data released" },
+  { date: "Sep. 24, 2026", dateTime: "2026-09-24", event: "Real development data and baselines released" },
   { date: "Nov. 24, 2026", dateTime: "2026-11-24", event: "Real evaluation data released" },
   { date: "Dec. 10, 2026", dateTime: "2026-12-10", event: "Submission deadline" },
   { date: "Dec. 24, 2026", dateTime: "2026-12-24", event: "Results released" },
