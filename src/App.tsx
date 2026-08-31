@@ -706,7 +706,17 @@ export default function App() {
               <section className="resource-subsection" aria-labelledby="registration-title">
                 <h3 id="registration-title">Registration</h3>
                 <p>Teams will register for the challenge by submitting the official registration form.</p>
-                <p className="resource-pending">Link to registration form: <strong>To be announced</strong></p>
+                <p className="resource-pending">
+                  Registration form:{" "}
+                  <a
+                    className="resource-link"
+                    href="https://forms.gle/vpWYdEp3i6kHX7hV8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Registration Form
+                  </a>
+                </p>
               </section>
 
               <section className="resource-subsection" aria-labelledby="dataset-baseline-title">

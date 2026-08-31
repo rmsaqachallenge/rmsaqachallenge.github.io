@@ -1268,6 +1268,18 @@ svg {
   color: inherit;
 }
 
+.resource-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 180ms ease;
+}
+
+.resource-link:hover {
+  color: var(--blue);
+}
+
 .resource-subsection .resource-contact {
   margin-top: 12px;
   margin-bottom: 0;
