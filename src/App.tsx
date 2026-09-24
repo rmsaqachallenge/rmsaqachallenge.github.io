@@ -721,10 +721,32 @@ export default function App() {
 
               <section className="resource-subsection" aria-labelledby="dataset-baseline-title">
                 <h3 id="dataset-baseline-title">Dataset &amp; Baseline</h3>
-                <p>The official challenge dataset and baseline system will be available from this section.</p>
-                <div className="resource-pending-list" aria-label="Dataset and baseline link status">
-                  <p className="resource-pending">Dataset link: <strong>To be announced</strong></p>
-                  <p className="resource-pending">Baseline link: <strong>To be announced</strong></p>
+                <p>Access the official challenge data and the reference implementation from the links below.</p>
+                <div className="resource-pending-list" aria-label="Dataset and baseline links">
+                  <p className="resource-pending">
+                    Dataset: {" "}
+                    <a
+                      className="resource-link"
+                      href="https://huggingface.co/datasets/PeacefulData/RMS-AQA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open the RMS-AQA dataset on Hugging Face"
+                    >
+                      RMS-AQA Dataset
+                    </a>
+                  </p>
+                  <p className="resource-pending">
+                    Baseline: {" "}
+                    <a
+                      className="resource-link"
+                      href="https://github.com/rmsaqachallenge/rmsaqa-code"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open the RMS-AQA baseline code repository on GitHub"
+                    >
+                      Baseline Code
+                    </a>
+                  </p>
                 </div>
               </section>
 
