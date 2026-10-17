@@ -765,12 +765,29 @@ export default function App() {
               <section className="resource-subsection" aria-labelledby="guidelines-title">
                 <h3 id="guidelines-title">Participation Guidelines</h3>
                 <p>
-                  External data and pretrained models are permitted but must be declared in the
-                  system report. Manual annotation or modification of evaluation data, use of
-                  hidden labels or metadata, and evaluation-set leakage are
-                  prohibited. Any signal processing, spatial audio, machine learning, or LALM
-                  method may be used, provided predictions follow the official submission format.
+                  External data and pretrained models are permitted, but must be declared in the
+                  system report. Signal processing, spatial audio, machine learning, and other
+                  compliant methods may be used, provided predictions follow the official
+                  submission format. All participating teams must follow these rules:
                 </p>
+                <ol className="participation-rules">
+                  <li>Each team may submit only one system for official evaluation.</li>
+                  <li>
+                    Open-source large language models (LLMs) are permitted; closed-source LLMs are
+                    not. No individual model may exceed 30 billion (30B) parameters. In cascaded,
+                    multi-stage, or ensemble systems, every component model must be under 30B, and
+                    the combined parameter count of all models must not exceed 100B.
+                  </li>
+                  <li>
+                    The validation set must not be used to train or calibrate the final system.
+                  </li>
+                  <li>
+                    Manual annotation or modification of evaluation data, use of hidden labels or
+                    metadata, and evaluation-set leakage are prohibited. Unsupervised use of
+                    evaluation data is also prohibited, including clustering clips by recording
+                    conditions or adapting a model without labels.
+                  </li>
+                </ol>
                 <p className="resource-contact">
                   For participation inquiries, contact the organizing committee at
                   {" "}<a href="mailto:rmsaqa.2027@gmail.com">

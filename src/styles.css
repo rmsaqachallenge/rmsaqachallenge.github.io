@@ -1252,6 +1252,26 @@ svg {
   text-wrap: wrap;
 }
 
+.participation-rules {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 16px;
+  padding-left: 1.6rem;
+  color: var(--text-secondary);
+  font-size: 1.03rem;
+  line-height: 1.68;
+}
+
+.participation-rules li {
+  padding-left: 0.25rem;
+  overflow-wrap: break-word;
+}
+
+.participation-rules li::marker {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
 .resource-pending-list {
   display: grid;
   gap: 4px;
