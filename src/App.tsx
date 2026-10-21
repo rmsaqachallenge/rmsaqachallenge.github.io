@@ -748,6 +748,11 @@ export default function App() {
                     </a>
                   </p>
                 </div>
+                <p>
+                  <strong>Important:</strong> The email address on your Hugging Face dataset access
+                  request must exactly match the Primary contact email used during challenge
+                  registration.
+                </p>
               </section>
 
               <section className="resource-subsection" aria-labelledby="submission-title">
