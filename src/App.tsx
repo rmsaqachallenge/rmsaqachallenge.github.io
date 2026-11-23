@@ -779,9 +779,12 @@ export default function App() {
                   <li>Each team may submit only one system for official evaluation.</li>
                   <li>
                     Open-source large language models (LLMs) are permitted; closed-source LLMs are
-                    not. No individual model may exceed 30 billion (30B) parameters. In cascaded,
-                    multi-stage, or ensemble systems, every component model must be under 30B, and
-                    the combined parameter count of all models must not exceed 100B.
+                    not. Closed-source models must not be used offline to generate reasoning
+                    annotations or refine training labels. No individual model may exceed 30 billion
+                    (30B) total parameters. For mixture-of-experts (MoE) models, this limit applies
+                    to total parameters, not activated parameters. In cascaded, multi-stage, or
+                    ensemble systems, every component model must be at most 30B total parameters,
+                    and the combined parameter count of all models must not exceed 100B.
                   </li>
                   <li>
                     The validation set must not be used to train or calibrate the final system.
@@ -809,7 +812,7 @@ export default function App() {
             <SectionHeading
               index="05 / Timeline"
               title="Challenge Timeline"
-              description="Key dates for registration, data release, evaluation, submissions, and the ICASSP 2027 challenge session."
+              description="Key dates for registration, data release, evaluation, submissions, and the ICASSP 2027 challenge session. All dates and times are Anywhere on Earth (AoE, UTC−12)."
             />
             <ol className="timeline-list" role="list">
               {timelineItems.map(({ date, dateTime, event }) => (
