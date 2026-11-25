@@ -1267,6 +1267,14 @@ svg {
   overflow-wrap: break-word;
 }
 
+.participation-rules li p {
+  margin: 0;
+}
+
+.participation-rules li p + p {
+  margin-top: 0.75em;
+}
+
 .participation-rules li::marker {
   color: var(--blue-dark);
   font-weight: 700;

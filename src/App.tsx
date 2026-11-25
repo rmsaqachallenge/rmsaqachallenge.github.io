@@ -778,13 +778,25 @@ export default function App() {
                 <ol className="participation-rules">
                   <li>Each team may submit only one system for official evaluation.</li>
                   <li>
+                    <p>
                     Open-source large language models (LLMs) are permitted; closed-source LLMs are
                     not. Closed-source models must not be used offline to generate reasoning
-                    annotations or refine training labels. No individual model may exceed 30 billion
-                    (30B) total parameters. For mixture-of-experts (MoE) models, this limit applies
-                    to total parameters, not activated parameters. In cascaded, multi-stage, or
-                    ensemble systems, every component model must be at most 30B total parameters,
-                    and the combined parameter count of all models must not exceed 100B.
+                    annotations or refine training labels. No individual model may exceed 32 billion
+                    (<strong>32B</strong>) total parameters. In cascaded, multi-stage, or ensemble systems, each
+                    component model must be at most <strong>32B</strong> parameters, and the combined parameter count
+                    of all models must not exceed <strong>100B</strong>.
+                    </p>
+                    <p>
+                    Count all parameters in modules used during
+                    inference, including frozen weights, all experts in mixture-of-experts (MoE)
+                    models, LoRA adapters, audio encoders, and spatial audio encoders. For MoE models,
+                    count all experts, not just those activated for a given input. LoRA and other
+                    low-rank adaptations merged into existing weight matrices at inference do not
+                    add to the parameter count. Unused submodules, such as a vision encoder, talker,
+                    or codec decoder, may be removed and excluded. New modules added to a base model,
+                    including projection layers, additional encoder heads, and cross-attention layers,
+                    must be counted if used during inference.
+                    </p>
                   </li>
                   <li>
                     The validation set must not be used to train or calibrate the final system.
